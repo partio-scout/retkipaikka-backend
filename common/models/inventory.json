@@ -1,0 +1,93 @@
+{
+  "name": "Inventory",
+  "options": {
+    "idInjection": false,
+    "retkipaikka_beta": {
+      "schema": "strongloop",
+      "table": "inventory"
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "String",
+      "required": false,
+      "length": 64,
+      "precision": null,
+      "scale": null,
+      "retkipaikka_beta": {
+        "columnName": "id",
+        "dataType": "character varying",
+        "dataLength": 64,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    },
+    "productId": {
+      "type": "String",
+      "id": 1,
+      "required": false,
+      "length": 20,
+      "precision": null,
+      "scale": null,
+      "retkipaikka_beta": {
+        "columnName": "product_id",
+        "dataType": "character varying",
+        "dataLength": 20,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      }
+    },
+    "locationId": {
+      "type": "String",
+      "id": 1,
+      "required": false,
+      "length": 20,
+      "precision": null,
+      "scale": null,
+      "retkipaikka_beta": {
+        "columnName": "location_id",
+        "dataType": "character varying",
+        "dataLength": 20,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      }
+    },
+    "available": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "retkipaikka_beta": {
+        "columnName": "available",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      }
+    },
+    "total": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "retkipaikka_beta": {
+        "columnName": "total",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

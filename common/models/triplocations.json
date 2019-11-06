@@ -1,0 +1,66 @@
+{
+    "name": "Triplocations",
+    "base": "PersistedModel",
+    "properties": {
+        "location_id": {
+            "type": "number",
+            "id": true,
+            "generated": true
+        },
+        "location_type": {
+            "type": "string",
+            "required": true
+        },
+        "location_name": {
+            "type": "string",
+            "required": true,
+            "index": {
+                "unique": true
+            }
+        },
+        "location_place": {
+            "type": "string",
+            "required": true
+        },
+        "location_geo": {
+            "type": "GeoPoint",
+            "required": true
+        },
+        "location_description": {
+            "type": "string",
+            "required": false
+        },
+        "location_pricing": {
+            "type": "string",
+            "required": false
+        },
+        "location_imageurl": {
+            "type": "string",
+            "required": false
+        },
+        "location_accepted": {
+            "type": "boolean",
+            "required": false,
+            "default": false
+        },
+        "addedAt": {
+            "type": "date",
+            "required": true,
+            "defaultFn": "now"
+        },
+        "deletedAt": {
+            "type": "date",
+            "required": false
+        }
+    },
+    "validations": [],
+    "relations": {
+        "categories": {
+            "type": "belongsTo",
+            "model": "Categories",
+            "foreignKey": "location_category"
+        }
+    },
+    "acls": [],
+    "methods": {}
+}

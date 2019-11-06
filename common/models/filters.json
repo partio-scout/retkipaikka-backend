@@ -1,0 +1,26 @@
+{
+  "name": "Filters",
+  "base": "PersistedModel",
+  "properties": {
+    "filter_id": {
+      "type": "number",
+      "id": true,
+      "generated": true
+    },
+    "filter_type": {
+      "type": "string",
+      "required": true
+    },
+    "filter_name": {
+      "type": "string",
+      "required": true,
+      "index": {
+        "unique": true
+      }
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

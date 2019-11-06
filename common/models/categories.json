@@ -1,0 +1,32 @@
+{
+    "name": "Categories",
+    "base": "PersistedModel",
+    "properties": {
+        "category_id": {
+            "type": "number",
+            "id": true,
+            "generated": true
+        },
+        "category_type": {
+            "type": "string",
+            "required": true
+        },
+        "category_name": {
+            "type": "string",
+            "required": true,
+            "index": {
+                "unique": true
+            }
+        }
+    },
+    "validations": [],
+    "relations": {
+        "triplocations": {
+            "type": "hasMany",
+            "model": "Triplocations",
+            "foreignKey": "location_category"
+        }
+    },
+    "acls": [],
+    "methods": {}
+}
