@@ -20,7 +20,15 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "triplocations": {
+      "type": "hasMany",
+      "model": "Triplocations",
+      "foreignKey": "filterId",
+      "through": "Locationfeatures",
+      "keyThrough": "locationId"
+    }
+  },
   "acls": [],
   "methods": {}
 }

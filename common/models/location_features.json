@@ -1,0 +1,20 @@
+{
+  "name": "Locationfeatures",
+  "base": "PersistedModel",
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "triplocations": {
+      "type": "belongsTo",
+      "model": "Triplocations",
+      "foreignKey": "locationId"
+    },
+    "filters": {
+      "type": "belongsTo",
+      "model": "Filters",
+      "foreignKey": "filterId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

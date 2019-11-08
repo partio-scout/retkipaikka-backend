@@ -1,66 +1,93 @@
 {
-    "name": "Triplocations",
-    "base": "PersistedModel",
-    "properties": {
-        "location_id": {
-            "type": "number",
-            "id": true,
-            "generated": true
-        },
-        "location_type": {
-            "type": "string",
-            "required": true
-        },
-        "location_name": {
-            "type": "string",
-            "required": true,
-            "index": {
-                "unique": true
-            }
-        },
-        "location_place": {
-            "type": "string",
-            "required": true
-        },
-        "location_geo": {
-            "type": "GeoPoint",
-            "required": true
-        },
-        "location_description": {
-            "type": "string",
-            "required": false
-        },
-        "location_pricing": {
-            "type": "string",
-            "required": false
-        },
-        "location_imageurl": {
-            "type": "string",
-            "required": false
-        },
-        "location_accepted": {
-            "type": "boolean",
-            "required": false,
-            "default": false
-        },
-        "addedAt": {
-            "type": "date",
-            "required": true,
-            "defaultFn": "now"
-        },
-        "deletedAt": {
-            "type": "date",
-            "required": false
-        }
+  "name": "Triplocations",
+  "base": "PersistedModel",
+  "properties": {
+    "location_id": {
+      "type": "number",
+      "id": true,
+      "generated": true
     },
-    "validations": [],
-    "relations": {
-        "categories": {
-            "type": "belongsTo",
-            "model": "Categories",
-            "foreignKey": "location_category"
-        }
+    "location_type": {
+      "type": "string",
+      "required": true
     },
-    "acls": [],
-    "methods": {}
+    "location_category": {
+      "type": "number",
+      "required": true
+    },
+    "location_name": {
+      "type": "string",
+      "required": true,
+      "index": {
+        "unique": true
+      }
+    },
+    "location_place": {
+      "type": "string",
+      "required": true
+    },
+    "location_geo": {
+      "type": "GeoPoint",
+      "required": true
+    },
+    "location_description": {
+      "type": "string",
+      "required": false
+    },
+    "location_pricing": {
+      "type": "string",
+      "required": false
+    },
+    "location_imageurl": {
+      "type": "string",
+      "required": false
+    },
+    "location_accepted": {
+      "type": "boolean",
+      "required": false,
+      "default": false
+    },
+    "location_owner": {
+      "type": "string",
+      "required": true
+    },
+    "location_website": {
+      "type": "string",
+      "required": false
+    },
+    "location_phone": {
+      "type": "string",
+      "required": false
+    },
+    "location_mail": {
+      "type": "string",
+      "required": false
+    },
+    "addedAt": {
+      "type": "date",
+      "required": true,
+      "defaultFn": "now"
+    },
+    "deletedAt": {
+      "type": "date",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "filters": {
+      "type": "hasMany",
+      "model": "Filters",
+      "foreignKey": "locationId",
+      "through": "Locationfeatures",
+      "keyThrough": "filterId"
+    },
+    "categories": {
+      "type": "belongsTo",
+      "model": "Categories",
+      "foreignKey": "location_category"
+    }
+  },
+  "acls": [],
+  "methods": {}
 }
