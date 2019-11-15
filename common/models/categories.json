@@ -7,11 +7,11 @@
       "id": true,
       "generated": true
     },
-    "category_type": {
+    "object_type": {
       "type": "string",
       "required": true
     },
-    "category_name": {
+    "object_name": {
       "type": "string",
       "required": true,
       "index": {

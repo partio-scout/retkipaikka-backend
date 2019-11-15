@@ -7,7 +7,7 @@
       "id": true,
       "generated": true
     },
-    "location_type": {
+    "object_type": {
       "type": "string",
       "required": true
     },
@@ -15,14 +15,11 @@
       "type": "number",
       "required": true
     },
-    "location_name": {
+    "object_name": {
       "type": "string",
-      "required": true,
-      "index": {
-        "unique": true
-      }
+      "required": true
     },
-    "location_place": {
+    "location_name": {
       "type": "string",
       "required": true
     },
@@ -35,10 +32,6 @@
       "required": false
     },
     "location_pricing": {
-      "type": "string",
-      "required": false
-    },
-    "location_imageurl": {
       "type": "string",
       "required": false
     },
@@ -62,15 +55,6 @@
     "location_mail": {
       "type": "string",
       "required": false
-    },
-    "addedAt": {
-      "type": "date",
-      "required": true,
-      "defaultFn": "now"
-    },
-    "deletedAt": {
-      "type": "date",
-      "required": false
     }
   },
   "validations": [],
@@ -86,6 +70,21 @@
       "type": "belongsTo",
       "model": "Categories",
       "foreignKey": "location_category"
+    },
+    "images": {
+      "type": "hasMany",
+      "model": "Images",
+      "foreignKey": "locationId"
+    }
+  },
+  "mixins": {
+    "SoftDelete": true,
+    "TimeStamp": {
+      "createdAt": "createdAt",
+      "updatedAt": "updatedAt",
+      "required": false,
+      "validateUpsert": true,
+      "silenceWarnings": true
     }
   },
   "acls": [],

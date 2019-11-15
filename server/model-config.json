@@ -10,7 +10,9 @@
       "loopback/common/mixins",
       "loopback/server/mixins",
       "../common/mixins",
-      "./mixins"
+      "./mixins",
+      "../node_modules/loopback-ds-timestamp-mixin",
+      "../node_modules/loopback-softdelete-mixin4"
     ]
   },
   "User": {
@@ -45,6 +47,12 @@
     "dataSource": "db"
   },
   "Locationfeatures": {
+    "dataSource": "db"
+  },
+  "Notifications": {
+    "dataSource": "db"
+  },
+  "Images": {
     "dataSource": "db"
   }
 }

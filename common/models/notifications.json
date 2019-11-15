@@ -1,0 +1,36 @@
+{
+    "name": "Notifications",
+    "base": "PersistedModel",
+    "properties": {
+        "notification_id": {
+            "type": "number",
+            "id": true,
+            "generated": true
+        },
+        "notification_title": {
+            "type": "string",
+            "required": true
+        },
+        "notification_description": {
+            "type": "string",
+            "required": true,
+            "index": {
+                "unique": true
+            }
+        }
+    },
+    "validations": [],
+    "relations": {},
+    "mixins": {
+        "SoftDelete": true,
+        "TimeStamp": {
+            "createdAt": "createdAt",
+            "updatedAt": "updatedAt",
+            "required": false,
+            "validateUpsert": true,
+            "silenceWarnings": true
+        }
+    },
+    "acls": [],
+    "methods": {}
+}

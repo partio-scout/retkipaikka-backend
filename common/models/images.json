@@ -1,0 +1,25 @@
+{
+    "name": "Images",
+    "base": "PersistedModel",
+    "properties": {
+        "id": {
+            "type": "number",
+            "id": true,
+            "generated": true
+        },
+        "image_url": {
+            "type": "string",
+            "required": true
+        }
+    },
+    "validations": [],
+    "relations": {
+        "triplocations": {
+            "type": "belongsTo",
+            "model": "Triplocations",
+            "foreignKey": "locationId"
+        }
+    },
+    "acls": [],
+    "methods": {}
+}

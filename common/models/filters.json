@@ -7,11 +7,11 @@
       "id": true,
       "generated": true
     },
-    "filter_type": {
+    "object_type": {
       "type": "string",
       "required": true
     },
-    "filter_name": {
+    "object_name": {
       "type": "string",
       "required": true,
       "index": {

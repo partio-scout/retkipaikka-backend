@@ -15,15 +15,15 @@ module.exports = function (Triplocations) {
 
                 {
                     relation: "filters",
-                    scope: { // further filter categories
-                        fields: ['filter_name']
+                    scope: { // further filter filters
+                        fields: ['object_name']
                     }
                 },
 
                 {
                     relation: "categories",
                     scope: { // further filter categories
-                        fields: ['category_name']
+                        fields: ['object_name']
                     }
                 }
 
@@ -36,8 +36,8 @@ module.exports = function (Triplocations) {
             for (let i = 0; i < obj.length; ++i) {
                 let trip = obj[i];
                 trip = JSON.parse(JSON.stringify(trip));
-                trip.location_category = trip.categories.category_name;
-                trip["filters"] = trip["filters"].map(t => t.filter_name)
+                trip.location_category = trip.categories.object_name;
+                trip["filters"] = trip["filters"].map(t => t.object_name)
                 delete trip.categories
                 objs.push(trip);
             }
@@ -46,6 +46,13 @@ module.exports = function (Triplocations) {
         console.log("returned " + locations.length + " locations");
         return locations;
     };
+
+    Triplocations.addNewLocation = async function (locationData, req, res) {
+        console.log(locationData);
+        return "success"
+
+
+    }
 
     Triplocations.remoteMethod(
         'fetchLocations', {
@@ -57,6 +64,32 @@ module.exports = function (Triplocations) {
         ],
         description: "returns all locations with all data",
         returns: { type: Triplocations, root: true }
+    }
+    );
+
+    Triplocations.remoteMethod(
+        'editLocation', {
+        http: { path: '/editLocation', verb: 'patch' },
+        accepts: [
+            { arg: 'locationData', type: 'object', http: { source: 'query' } },
+            { arg: 'req', type: 'object', http: { source: 'req' } },
+            { arg: 'res', type: 'object', http: { source: 'res' } }
+        ],
+        description: "Edits a triplocation",
+        returns: { type: String, root: true }
+    }
+
+    );
+    Triplocations.remoteMethod(
+        'addNewLocation', {
+        http: { path: '/addNewLocation', verb: 'post' },
+        accepts: [
+            { arg: 'locationData', type: 'object', http: { source: 'query' } },
+            { arg: 'req', type: 'object', http: { source: 'req' } },
+            { arg: 'res', type: 'object', http: { source: 'res' } }
+        ],
+        description: "Add a new instance of triplocation",
+        returns: { type: String, root: true }
     }
     );
 };
