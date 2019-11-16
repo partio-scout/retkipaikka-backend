@@ -96,6 +96,18 @@ module.exports = function (Triplocations) {
         return "success"
     }
 
+    Triplocations.editLocation = async function (locationData, req, res) {
+        let Locationfeatures = Triplocations.app.models.Locationfeatures;
+        let query = {
+            where: { location_id: locationData.location_id },
+
+        };
+        if (locationData.filters.length > 0) {
+            Locationfeatures.destroyAll(query);
+        }
+
+    }
+
 
 
 
