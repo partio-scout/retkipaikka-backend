@@ -1,4 +1,5 @@
 'use strict'
+const uuidv4 = require('uuid/v4');
 
 module.exports = function (Triplocations) {
 
@@ -48,11 +49,59 @@ module.exports = function (Triplocations) {
     };
 
     Triplocations.addNewLocation = async function (locationData, req, res) {
-        console.log(locationData);
+        let newObject = JSON.parse(JSON.stringify(locationData));
+        let Filters = Triplocations.app.models.Filters;
+        let Categories = Triplocations.app.models.Categories;
+        let Locationfeatures = Triplocations.app.models.Locationfeatures;
+        let dataFilters = locationData.filters;
+        //let newObj = getLocationSchema()
+
+        Categories.exists(locationData.location_category).then(res => {
+            if (!res) {
+                return "fail"
+            }
+        }).catch(err => {
+            console.error(err)
+            return "fail"
+        });
+
+        if (dataFilters.length > 0) {
+            for (let i = 0; i < dataFilters.length; ++i) {
+                let value = await Filters.exists(dataFilters[i]);
+                if (!value)
+                    return "fail"
+            }
+        }
+        delete newObject["filters"];
+        const uuid = uuidv4();
+        newObject["location_id"] = uuid;
+
+
+        Triplocations.create(newObject).then(res => {
+
+        }).catch(err => {
+            console.error(err);
+            return "fail"
+        });
+
+        for (let i = 0; i < dataFilters.length; ++i) {
+            let relationObject = {
+                locationId: uuid,
+                filterId: dataFilters[i]
+            }
+            await Locationfeatures.create(relationObject);
+        }
+
+        console.log("1 location succesfully added")
         return "success"
-
-
     }
+
+
+
+
+
+
+
 
     Triplocations.remoteMethod(
         'fetchLocations', {
@@ -90,7 +139,6 @@ module.exports = function (Triplocations) {
         ],
         description: "Add a new instance of triplocation",
         returns: { type: String, root: true }
-    }
-    );
+    });
 };
 

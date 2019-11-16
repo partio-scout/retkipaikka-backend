@@ -3,9 +3,10 @@
   "base": "PersistedModel",
   "properties": {
     "location_id": {
-      "type": "number",
+      "type": "string",
       "id": true,
-      "generated": true
+      "required": true,
+      "defaultFn": "uuid"
     },
     "object_type": {
       "type": "string",
