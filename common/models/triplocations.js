@@ -96,18 +96,65 @@ module.exports = function (Triplocations) {
         return "success"
     }
 
+
     Triplocations.editLocation = async function (locationData, req, res) {
         let Locationfeatures = Triplocations.app.models.Locationfeatures;
+        let newObject = JSON.parse(JSON.stringify(locationData));
+        const locationuuid = locationData.location_id;
         let query = {
-            where: { location_id: locationData.location_id },
+            where: { location_id: locationuuid },
 
         };
-        if (locationData.filters.length > 0) {
-            Locationfeatures.destroyAll(query);
+        if (locationData.filters) {
+            if (locationData.filters.length > 0) {
+                let dataFilters = locationData.filters;
+                Locationfeatures.destroyAll(query).then(async res => {
+                    for (let i = 0; i < dataFilters.length; ++i) {
+                        let relationObject = {
+                            locationId: locationuuid,
+                            filterId: dataFilters[i]
+                        }
+                        await Locationfeatures.create(relationObject);
+                    }
+                }).catch(err => {
+                    console.error(err);
+                    return "fail"
+                });
+            }
+            delete newObject["filters"];
+
         }
+
+
+        Triplocations.updateAll({ location_id: locationuuid }, newObject).then(res => {
+            return "success"
+        }).catch(err => {
+            console.error(err);
+            return "fail"
+        })
+        console.log("location succesfully updated")
+        return "success"
 
     }
 
+    Triplocations.deleteLocation = async function (locationData, req, res) {
+        let Locationfeatures = Triplocations.app.models.Locationfeatures;
+        const locationuuid = locationData.location_id;
+        let query = {
+            where: { location_id: locationuuid },
+
+        };
+
+        Locationfeatures.destroyAll(query).then(res => {
+            Triplocations.destroyById(locationuuid)
+        }).catch(err => {
+            console.error(err);
+            return "fail"
+        });
+        console.log("location succesfully deleted")
+        return "success"
+
+    }
 
 
 
@@ -150,6 +197,18 @@ module.exports = function (Triplocations) {
             { arg: 'res', type: 'object', http: { source: 'res' } }
         ],
         description: "Add a new instance of triplocation",
+        returns: { type: String, root: true }
+    });
+
+    Triplocations.remoteMethod(
+        'deleteLocation', {
+        http: { path: '/deleteLocation', verb: 'delete' },
+        accepts: [
+            { arg: 'locationData', type: 'object', http: { source: 'query' } },
+            { arg: 'req', type: 'object', http: { source: 'req' } },
+            { arg: 'res', type: 'object', http: { source: 'res' } }
+        ],
+        description: "Deletes a triplocation and its relations",
         returns: { type: String, root: true }
     });
 };
