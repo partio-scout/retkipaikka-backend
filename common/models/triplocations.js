@@ -65,13 +65,16 @@ module.exports = function (Triplocations) {
             return "fail"
         });
 
-        if (dataFilters.length > 0) {
-            for (let i = 0; i < dataFilters.length; ++i) {
-                let value = await Filters.exists(dataFilters[i]);
-                if (!value)
-                    return "fail"
+        if (dataFilters) {
+            if (dataFilters.length > 0) {
+                for (let i = 0; i < dataFilters.length; ++i) {
+                    let value = await Filters.exists(dataFilters[i]);
+                    if (!value)
+                        return "fail"
+                }
             }
         }
+
         delete newObject["filters"];
         const uuid = uuidv4();
         newObject["location_id"] = uuid;
@@ -83,14 +86,16 @@ module.exports = function (Triplocations) {
             console.error(err);
             return "fail"
         });
-
-        for (let i = 0; i < dataFilters.length; ++i) {
-            let relationObject = {
-                locationId: uuid,
-                filterId: dataFilters[i]
+        if (dataFilters) {
+            for (let i = 0; i < dataFilters.length; ++i) {
+                let relationObject = {
+                    locationId: uuid,
+                    filterId: dataFilters[i]
+                }
+                await Locationfeatures.create(relationObject);
             }
-            await Locationfeatures.create(relationObject);
         }
+
 
         console.log("1 location succesfully added")
         return "success"
@@ -102,13 +107,13 @@ module.exports = function (Triplocations) {
         let newObject = JSON.parse(JSON.stringify(locationData));
         const locationuuid = locationData.location_id;
         let query = {
-            where: { location_id: locationuuid },
-
+            locationId: locationuuid
         };
         if (locationData.filters) {
             if (locationData.filters.length > 0) {
                 let dataFilters = locationData.filters;
                 Locationfeatures.destroyAll(query).then(async res => {
+
                     for (let i = 0; i < dataFilters.length; ++i) {
                         let relationObject = {
                             locationId: locationuuid,
@@ -141,8 +146,7 @@ module.exports = function (Triplocations) {
         let Locationfeatures = Triplocations.app.models.Locationfeatures;
         const locationuuid = locationData.location_id;
         let query = {
-            where: { location_id: locationuuid },
-
+            locationId: locationuuid
         };
 
         Locationfeatures.destroyAll(query).then(res => {
