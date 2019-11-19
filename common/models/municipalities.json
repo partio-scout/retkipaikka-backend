@@ -1,0 +1,34 @@
+{
+    "name": "Municipalities",
+    "base": "PersistedModel",
+    "properties": {
+        "municipality_id": {
+            "type": "number",
+            "id": true,
+            "required": true
+        },
+        "object_name": {
+            "type": "string",
+            "required": true
+        },
+        "region_id": {
+            "type": "number",
+            "required": true
+        }
+    },
+    "validations": [],
+    "relations": {
+        "triplocations": {
+            "type": "hasMany",
+            "model": "Triplocations",
+            "foreignKey": "location_municipality"
+        },
+        "regions": {
+            "type": "belongsTo",
+            "model": "Regions",
+            "foreignKey": "region_id"
+        }
+    },
+    "acls": [],
+    "methods": {}
+}

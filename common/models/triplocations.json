@@ -16,8 +16,12 @@
       "type": "number",
       "required": true
     },
-    "object_name": {
-      "type": "string",
+    "location_municipality": {
+      "type": "number",
+      "required": false
+    },
+    "location_region": {
+      "type": "number",
       "required": true
     },
     "location_name": {
@@ -63,14 +67,24 @@
     "filters": {
       "type": "hasMany",
       "model": "Filters",
-      "foreignKey": "locationId",
+      "foreignKey": "location_id",
       "through": "Locationfeatures",
-      "keyThrough": "filterId"
+      "keyThrough": "filter_id"
     },
     "categories": {
       "type": "belongsTo",
       "model": "Categories",
       "foreignKey": "location_category"
+    },
+    "municipalities": {
+      "type": "belongsTo",
+      "model": "Municipalities",
+      "foreignKey": "location_municipality"
+    },
+    "region": {
+      "type": "belongsTo",
+      "model": "Regions",
+      "foreignKey": "location_region"
     },
     "images": {
       "type": "hasMany",

@@ -1,0 +1,30 @@
+{
+    "name": "Regions",
+    "base": "PersistedModel",
+    "properties": {
+        "region_id": {
+            "type": "number",
+            "id": true,
+            "required": true
+        },
+        "location_name": {
+            "type": "string",
+            "required": true
+        }
+    },
+    "validations": [],
+    "relations": {
+        "municipalities": {
+            "type": "hasMany",
+            "model": "Municipalities",
+            "foreignKey": "region_id"
+        },
+        "triplocations": {
+            "type": "hasMany",
+            "model": "Triplocations",
+            "foreignKey": "location_region"
+        }
+    },
+    "acls": [],
+    "methods": {}
+}

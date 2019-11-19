@@ -24,9 +24,9 @@
     "triplocations": {
       "type": "hasMany",
       "model": "Triplocations",
-      "foreignKey": "filterId",
+      "foreignKey": "filter_id",
       "through": "Locationfeatures",
-      "keyThrough": "locationId"
+      "keyThrough": "location_id"
     }
   },
   "acls": [],

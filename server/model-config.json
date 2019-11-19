@@ -54,5 +54,11 @@
   },
   "Images": {
     "dataSource": "db"
+  },
+  "Regions": {
+    "dataSource": "db"
+  },
+  "Municipalities": {
+    "dataSource": "db"
   }
 }
