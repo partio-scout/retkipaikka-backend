@@ -110,7 +110,7 @@ module.exports = function (Triplocations) {
             locationId: locationuuid
         };
         if (locationData.filters) {
-            if (locationData.filters.length > 0) {
+            if (locationData.filters.length >= 0) {
                 let dataFilters = locationData.filters;
                 Locationfeatures.destroyAll(query).then(async res => {
 

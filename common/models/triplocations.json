@@ -79,7 +79,6 @@
     }
   },
   "mixins": {
-    "SoftDelete": true,
     "TimeStamp": {
       "createdAt": "createdAt",
       "updatedAt": "updatedAt",
