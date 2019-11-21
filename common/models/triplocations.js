@@ -132,6 +132,10 @@ module.exports = function (Triplocations) {
         let query = {
             location_id: locationuuid
         };
+        console.log(locationData);
+        if (locationData.location_region && !locationData.location_municipality) {
+            newObject.location_municipality = null;
+        }
         if (locationData.filters) {
             if (locationData.filters.length >= 0) {
                 let dataFilters = locationData.filters;
