@@ -1,79 +1,79 @@
 module.exports.Regions = [
     {
         "region_id": 1,
-        "location_name": "Uusimaa"
+        "object_name": "Uusimaa"
     },
     {
         "region_id": 2,
-        "location_name": "Varsinais-Suomi"
+        "object_name": "Varsinais-Suomi"
     },
     {
         "region_id": 3,
-        "location_name": "Satakunta"
+        "object_name": "Satakunta"
     },
     {
         "region_id": 4,
-        "location_name": "Kanta-Häme"
+        "object_name": "Kanta-Häme"
     },
     {
         "region_id": 5,
-        "location_name": "Pirkanmaa"
+        "object_name": "Pirkanmaa"
     },
     {
         "region_id": 6,
-        "location_name": "Päijät-Häme"
+        "object_name": "Päijät-Häme"
     },
     {
         "region_id": 7,
-        "location_name": "Kymenlaakso"
+        "object_name": "Kymenlaakso"
     },
     {
         "region_id": 8,
-        "location_name": "Etelä-Karjala"
+        "object_name": "Etelä-Karjala"
     },
     {
         "region_id": 9,
-        "location_name": "Etelä-Savo"
+        "object_name": "Etelä-Savo"
     },
     {
         "region_id": 10,
-        "location_name": "Pohjois-Savo"
+        "object_name": "Pohjois-Savo"
     },
     {
         "region_id": 11,
-        "location_name": "Pohjois-Karjala"
+        "object_name": "Pohjois-Karjala"
     },
     {
         "region_id": 12,
-        "location_name": "Keski-Suomi"
+        "object_name": "Keski-Suomi"
     },
     {
         "region_id": 13,
-        "location_name": "Etelä-Pohjanmaa"
+        "object_name": "Etelä-Pohjanmaa"
     },
     {
         "region_id": 14,
-        "location_name": "Pohjanmaa"
+        "object_name": "Pohjanmaa"
     },
     {
         "region_id": 15,
-        "location_name": "Keski-Pohjanmaa"
+        "object_name": "Keski-Pohjanmaa"
     },
     {
         "region_id": 16,
-        "location_name": "Pohjois-Pohjanmaa"
+        "object_name": "Pohjois-Pohjanmaa"
     },
     {
         "region_id": 17,
-        "location_name": "Kainuu"
+        "object_name": "Kainuu"
     },
     {
         "region_id": 18,
-        "location_name": "Lappi"
+        "object_name": "Lappi"
     },
     {
         "region_id": 19,
-        "location_name": "Ahvenanmaa"
+        "object_name": "Ahvenanmaa"
     }
 
 ]
@@ -81,1557 +81,1557 @@ module.exports.Regions = [
 module.exports.Municipalities = [
     {
         "municipality_id": 18,
-        "location_name": "Askola",
+        "object_name": "Askola",
         "region_id": 1
     },
     {
         "municipality_id": 49,
-        "location_name": "Espoo",
+        "object_name": "Espoo",
         "region_id": 1
     },
     {
         "municipality_id": 78,
-        "location_name": "Hanko",
+        "object_name": "Hanko",
         "region_id": 1
     },
     {
         "municipality_id": 91,
-        "location_name": "Helsinki",
+        "object_name": "Helsinki",
         "region_id": 1
     },
     {
         "municipality_id": 92,
-        "location_name": "Vantaa",
+        "object_name": "Vantaa",
         "region_id": 1
     },
     {
         "municipality_id": 106,
-        "location_name": "Hyvinkää",
+        "object_name": "Hyvinkää",
         "region_id": 1
     },
     {
         "municipality_id": 149,
-        "location_name": "Inkoo",
+        "object_name": "Inkoo",
         "region_id": 1
     },
     {
         "municipality_id": 186,
-        "location_name": "Järvenpää",
+        "object_name": "Järvenpää",
         "region_id": 1
     },
     {
         "municipality_id": 224,
-        "location_name": "Karkkila",
+        "object_name": "Karkkila",
         "region_id": 1
     },
     {
         "municipality_id": 235,
-        "location_name": "Kauniainen",
+        "object_name": "Kauniainen",
         "region_id": 1
     },
     {
         "municipality_id": 245,
-        "location_name": "Kerava",
+        "object_name": "Kerava",
         "region_id": 1
     },
     {
         "municipality_id": 257,
-        "location_name": "Kirkkonummi",
+        "object_name": "Kirkkonummi",
         "region_id": 1
     },
     {
         "municipality_id": 407,
-        "location_name": "Lapinjärvi",
+        "object_name": "Lapinjärvi",
         "region_id": 1
     },
     {
         "municipality_id": 434,
-        "location_name": "Loviisa",
+        "object_name": "Loviisa",
         "region_id": 1
     },
     {
         "municipality_id": 444,
-        "location_name": "Lohja",
+        "object_name": "Lohja",
         "region_id": 1
     },
     {
         "municipality_id": 504,
-        "location_name": "Myrskylä",
+        "object_name": "Myrskylä",
         "region_id": 1
     },
     {
         "municipality_id": 505,
-        "location_name": "Mäntsälä",
+        "object_name": "Mäntsälä",
         "region_id": 1
     },
     {
         "municipality_id": 543,
-        "location_name": "Nurmijärvi",
+        "object_name": "Nurmijärvi",
         "region_id": 1
     },
     {
         "municipality_id": 611,
-        "location_name": "Pornainen",
+        "object_name": "Pornainen",
         "region_id": 1
     },
     {
         "municipality_id": 616,
-        "location_name": "Pukkila",
+        "object_name": "Pukkila",
         "region_id": 1
     },
     {
         "municipality_id": 638,
-        "location_name": "Porvoo",
+        "object_name": "Porvoo",
         "region_id": 1
     },
     {
         "municipality_id": 710,
-        "location_name": "Raasepori",
+        "object_name": "Raasepori",
         "region_id": 1
     },
     {
         "municipality_id": 753,
-        "location_name": "Sipoo",
+        "object_name": "Sipoo",
         "region_id": 1
     },
     {
         "municipality_id": 755,
-        "location_name": "Siuntio",
+        "object_name": "Siuntio",
         "region_id": 1
     },
     {
         "municipality_id": 858,
-        "location_name": "Tuusula",
+        "object_name": "Tuusula",
         "region_id": 1
     },
     {
         "municipality_id": 927,
-        "location_name": "Vihti",
+        "object_name": "Vihti",
         "region_id": 1
     },
     {
         "municipality_id": 19,
-        "location_name": "Aura",
+        "object_name": "Aura",
         "region_id": 2
     },
     {
         "municipality_id": 202,
-        "location_name": "Kaarina",
+        "object_name": "Kaarina",
         "region_id": 2
     },
     {
         "municipality_id": 284,
-        "location_name": "Koski Tl",
+        "object_name": "Koski Tl",
         "region_id": 2
     },
     {
         "municipality_id": 304,
-        "location_name": "Kustavi",
+        "object_name": "Kustavi",
         "region_id": 2
     },
     {
         "municipality_id": 322,
-        "location_name": "Kemiönsaari",
+        "object_name": "Kemiönsaari",
         "region_id": 2
     },
     {
         "municipality_id": 400,
-        "location_name": "Laitila",
+        "object_name": "Laitila",
         "region_id": 2
     },
     {
         "municipality_id": 423,
-        "location_name": "Lieto",
+        "object_name": "Lieto",
         "region_id": 2
     },
     {
         "municipality_id": 430,
-        "location_name": "Loimaa",
+        "object_name": "Loimaa",
         "region_id": 2
     },
     {
         "municipality_id": 445,
-        "location_name": "Parainen",
+        "object_name": "Parainen",
         "region_id": 2
     },
     {
         "municipality_id": 480,
-        "location_name": "Marttila",
+        "object_name": "Marttila",
         "region_id": 2
     },
     {
         "municipality_id": 481,
-        "location_name": "Masku",
+        "object_name": "Masku",
         "region_id": 2
     },
     {
         "municipality_id": 503,
-        "location_name": "Mynämäki",
+        "object_name": "Mynämäki",
         "region_id": 2
     },
     {
         "municipality_id": 529,
-        "location_name": "Naantali",
+        "object_name": "Naantali",
         "region_id": 2
     },
     {
         "municipality_id": 538,
-        "location_name": "Nousiainen",
+        "object_name": "Nousiainen",
         "region_id": 2
     },
     {
         "municipality_id": 561,
-        "location_name": "Oripää",
+        "object_name": "Oripää",
         "region_id": 2
     },
     {
         "municipality_id": 577,
-        "location_name": "Paimio",
+        "object_name": "Paimio",
         "region_id": 2
     },
     {
         "municipality_id": 631,
-        "location_name": "Pyhäranta",
+        "object_name": "Pyhäranta",
         "region_id": 2
     },
     {
         "municipality_id": 636,
-        "location_name": "Pöytyä",
+        "object_name": "Pöytyä",
         "region_id": 2
     },
     {
         "municipality_id": 680,
-        "location_name": "Raisio",
+        "object_name": "Raisio",
         "region_id": 2
     },
     {
         "municipality_id": 704,
-        "location_name": "Rusko",
+        "object_name": "Rusko",
         "region_id": 2
     },
     {
         "municipality_id": 734,
-        "location_name": "Salo",
+        "object_name": "Salo",
         "region_id": 2
     },
     {
         "municipality_id": 738,
-        "location_name": "Sauvo",
+        "object_name": "Sauvo",
         "region_id": 2
     },
     {
         "municipality_id": 761,
-        "location_name": "Somero",
+        "object_name": "Somero",
         "region_id": 2
     },
     {
         "municipality_id": 833,
-        "location_name": "Taivassalo",
+        "object_name": "Taivassalo",
         "region_id": 2
     },
     {
         "municipality_id": 853,
-        "location_name": "Turku",
+        "object_name": "Turku",
         "region_id": 2
     },
     {
         "municipality_id": 895,
-        "location_name": "Uusikaupunki",
+        "object_name": "Uusikaupunki",
         "region_id": 2
     },
     {
         "municipality_id": 918,
-        "location_name": "Vehmaa",
+        "object_name": "Vehmaa",
         "region_id": 2
     },
     {
         "municipality_id": 50,
-        "location_name": "Eura",
+        "object_name": "Eura",
         "region_id": 3
     },
     {
         "municipality_id": 51,
-        "location_name": "Eurajoki",
+        "object_name": "Eurajoki",
         "region_id": 3
     },
     {
         "municipality_id": 79,
-        "location_name": "Harjavalta",
+        "object_name": "Harjavalta",
         "region_id": 3
     },
     {
         "municipality_id": 99,
-        "location_name": "Honkajoki",
+        "object_name": "Honkajoki",
         "region_id": 3
     },
     {
         "municipality_id": 102,
-        "location_name": "Huittinen",
+        "object_name": "Huittinen",
         "region_id": 3
     },
     {
         "municipality_id": 181,
-        "location_name": "Jämijärvi",
+        "object_name": "Jämijärvi",
         "region_id": 3
     },
     {
         "municipality_id": 214,
-        "location_name": "Kankaanpää",
+        "object_name": "Kankaanpää",
         "region_id": 3
     },
     {
         "municipality_id": 230,
-        "location_name": "Karvia",
+        "object_name": "Karvia",
         "region_id": 3
     },
     {
         "municipality_id": 271,
-        "location_name": "Kokemäki",
+        "object_name": "Kokemäki",
         "region_id": 3
     },
     {
         "municipality_id": 484,
-        "location_name": "Merikarvia",
+        "object_name": "Merikarvia",
         "region_id": 3
     },
     {
         "municipality_id": 531,
-        "location_name": "Nakkila",
+        "object_name": "Nakkila",
         "region_id": 3
     },
     {
         "municipality_id": 608,
-        "location_name": "Pomarkku",
+        "object_name": "Pomarkku",
         "region_id": 3
     },
     {
         "municipality_id": 609,
-        "location_name": "Pori",
+        "object_name": "Pori",
         "region_id": 3
     },
     {
         "municipality_id": 684,
-        "location_name": "Rauma",
+        "object_name": "Rauma",
         "region_id": 3
     },
     {
         "municipality_id": 747,
-        "location_name": "Siikainen",
+        "object_name": "Siikainen",
         "region_id": 3
     },
     {
         "municipality_id": 783,
-        "location_name": "Säkylä",
+        "object_name": "Säkylä",
         "region_id": 3
     },
     {
         "municipality_id": 886,
-        "location_name": "Ulvila",
+        "object_name": "Ulvila",
         "region_id": 3
     },
     {
         "municipality_id": 61,
-        "location_name": "Forssa",
+        "object_name": "Forssa",
         "region_id": 4
     },
     {
         "municipality_id": 82,
-        "location_name": "Hattula",
+        "object_name": "Hattula",
         "region_id": 4
     },
     {
         "municipality_id": 86,
-        "location_name": "Hausjärvi",
+        "object_name": "Hausjärvi",
         "region_id": 4
     },
     {
         "municipality_id": 103,
-        "location_name": "Humppila",
+        "object_name": "Humppila",
         "region_id": 4
     },
     {
         "municipality_id": 109,
-        "location_name": "Hämeenlinna",
+        "object_name": "Hämeenlinna",
         "region_id": 4
     },
     {
         "municipality_id": 165,
-        "location_name": "Janakkala",
+        "object_name": "Janakkala",
         "region_id": 4
     },
     {
         "municipality_id": 169,
-        "location_name": "Jokioinen",
+        "object_name": "Jokioinen",
         "region_id": 4
     },
     {
         "municipality_id": 433,
-        "location_name": "Loppi",
+        "object_name": "Loppi",
         "region_id": 4
     },
     {
         "municipality_id": 694,
-        "location_name": "Riihimäki",
+        "object_name": "Riihimäki",
         "region_id": 4
     },
     {
         "municipality_id": 834,
-        "location_name": "Tammela",
+        "object_name": "Tammela",
         "region_id": 4
     },
     {
         "municipality_id": 981,
-        "location_name": "Ypäjä",
+        "object_name": "Ypäjä",
         "region_id": 4
     },
     {
         "municipality_id": 20,
-        "location_name": "Akaa",
+        "object_name": "Akaa",
         "region_id": 5
     },
     {
         "municipality_id": 108,
-        "location_name": "Hämeenkyrö",
+        "object_name": "Hämeenkyrö",
         "region_id": 5
     },
     {
         "municipality_id": 143,
-        "location_name": "Ikaalinen",
+        "object_name": "Ikaalinen",
         "region_id": 5
     },
     {
         "municipality_id": 177,
-        "location_name": "Juupajoki",
+        "object_name": "Juupajoki",
         "region_id": 5
     },
     {
         "municipality_id": 211,
-        "location_name": "Kangasala",
+        "object_name": "Kangasala",
         "region_id": 5
     },
     {
         "municipality_id": 250,
-        "location_name": "Kihniö",
+        "object_name": "Kihniö",
         "region_id": 5
     },
     {
         "municipality_id": 418,
-        "location_name": "Lempäälä",
+        "object_name": "Lempäälä",
         "region_id": 5
     },
     {
         "municipality_id": 508,
-        "location_name": "Mänttä-Vilppula",
+        "object_name": "Mänttä-Vilppula",
         "region_id": 5
     },
     {
         "municipality_id": 536,
-        "location_name": "Nokia",
+        "object_name": "Nokia",
         "region_id": 5
     },
     {
         "municipality_id": 562,
-        "location_name": "Orivesi",
+        "object_name": "Orivesi",
         "region_id": 5
     },
     {
         "municipality_id": 581,
-        "location_name": "Parkano",
+        "object_name": "Parkano",
         "region_id": 5
     },
     {
         "municipality_id": 604,
-        "location_name": "Pirkkala",
+        "object_name": "Pirkkala",
         "region_id": 5
     },
     {
         "municipality_id": 619,
-        "location_name": "Punkalaidun",
+        "object_name": "Punkalaidun",
         "region_id": 5
     },
     {
         "municipality_id": 635,
-        "location_name": "Pälkäne",
+        "object_name": "Pälkäne",
         "region_id": 5
     },
     {
         "municipality_id": 702,
-        "location_name": "Ruovesi",
+        "object_name": "Ruovesi",
         "region_id": 5
     },
     {
         "municipality_id": 790,
-        "location_name": "Sastamala",
+        "object_name": "Sastamala",
         "region_id": 5
     },
     {
         "municipality_id": 837,
-        "location_name": "Tampere",
+        "object_name": "Tampere",
         "region_id": 5
     },
     {
         "municipality_id": 887,
-        "location_name": "Urjala",
+        "object_name": "Urjala",
         "region_id": 5
     },
     {
         "municipality_id": 908,
-        "location_name": "Valkeakoski",
+        "object_name": "Valkeakoski",
         "region_id": 5
     },
     {
         "municipality_id": 922,
-        "location_name": "Vesilahti",
+        "object_name": "Vesilahti",
         "region_id": 5
     },
     {
         "municipality_id": 936,
-        "location_name": "Virrat",
+        "object_name": "Virrat",
         "region_id": 5
     },
     {
         "municipality_id": 980,
-        "location_name": "Ylöjärvi",
+        "object_name": "Ylöjärvi",
         "region_id": 5
     },
     {
         "municipality_id": 16,
-        "location_name": "Asikkala",
+        "object_name": "Asikkala",
         "region_id": 6
     },
     {
         "municipality_id": 81,
-        "location_name": "Hartola",
+        "object_name": "Hartola",
         "region_id": 6
     },
     {
         "municipality_id": 98,
-        "location_name": "Hollola",
+        "object_name": "Hollola",
         "region_id": 6
     },
     {
         "municipality_id": 111,
-        "location_name": "Heinola",
+        "object_name": "Heinola",
         "region_id": 6
     },
     {
         "municipality_id": 316,
-        "location_name": "Kärkölä",
+        "object_name": "Kärkölä",
         "region_id": 6
     },
     {
         "municipality_id": 398,
-        "location_name": "Lahti",
+        "object_name": "Lahti",
         "region_id": 6
     },
     {
         "municipality_id": 560,
-        "location_name": "Orimattila",
+        "object_name": "Orimattila",
         "region_id": 6
     },
     {
         "municipality_id": 576,
-        "location_name": "Padasjoki",
+        "object_name": "Padasjoki",
         "region_id": 6
     },
     {
         "municipality_id": 781,
-        "location_name": "Sysmä",
+        "object_name": "Sysmä",
         "region_id": 6
     },
     {
         "municipality_id": 75,
-        "location_name": "Hamina",
+        "object_name": "Hamina",
         "region_id": 7
     },
     {
         "municipality_id": 142,
-        "location_name": "Iitti",
+        "object_name": "Iitti",
         "region_id": 7
     },
     {
         "municipality_id": 285,
-        "location_name": "Kotka",
+        "object_name": "Kotka",
         "region_id": 7
     },
     {
         "municipality_id": 286,
-        "location_name": "Kouvola",
+        "object_name": "Kouvola",
         "region_id": 7
     },
     {
         "municipality_id": 489,
-        "location_name": "Miehikkälä",
+        "object_name": "Miehikkälä",
         "region_id": 7
     },
     {
         "municipality_id": 624,
-        "location_name": "Pyhtää",
+        "object_name": "Pyhtää",
         "region_id": 7
     },
     {
         "municipality_id": 935,
-        "location_name": "Virolahti",
+        "object_name": "Virolahti",
         "region_id": 7
     },
     {
         "municipality_id": 153,
-        "location_name": "Imatra",
+        "object_name": "Imatra",
         "region_id": 8
     },
     {
         "municipality_id": 405,
-        "location_name": "Lappeenranta",
+        "object_name": "Lappeenranta",
         "region_id": 8
     },
     {
         "municipality_id": 416,
-        "location_name": "Lemi",
+        "object_name": "Lemi",
         "region_id": 8
     },
     {
         "municipality_id": 441,
-        "location_name": "Luumäki",
+        "object_name": "Luumäki",
         "region_id": 8
     },
     {
         "municipality_id": 580,
-        "location_name": "Parikkala",
+        "object_name": "Parikkala",
         "region_id": 8
     },
     {
         "municipality_id": 689,
-        "location_name": "Rautjärvi",
+        "object_name": "Rautjärvi",
         "region_id": 8
     },
     {
         "municipality_id": 700,
-        "location_name": "Ruokolahti",
+        "object_name": "Ruokolahti",
         "region_id": 8
     },
     {
         "municipality_id": 739,
-        "location_name": "Savitaipale",
+        "object_name": "Savitaipale",
         "region_id": 8
     },
     {
         "municipality_id": 831,
-        "location_name": "Taipalsaari",
+        "object_name": "Taipalsaari",
         "region_id": 8
     },
     {
         "municipality_id": 46,
-        "location_name": "Enonkoski",
+        "object_name": "Enonkoski",
         "region_id": 9
     },
     {
         "municipality_id": 90,
-        "location_name": "Heinävesi",
+        "object_name": "Heinävesi",
         "region_id": 9
     },
     {
         "municipality_id": 97,
-        "location_name": "Hirvensalmi",
+        "object_name": "Hirvensalmi",
         "region_id": 9
     },
     {
         "municipality_id": 171,
-        "location_name": "Joroinen",
+        "object_name": "Joroinen",
         "region_id": 9
     },
     {
         "municipality_id": 178,
-        "location_name": "Juva",
+        "object_name": "Juva",
         "region_id": 9
     },
     {
         "municipality_id": 213,
-        "location_name": "Kangasniemi",
+        "object_name": "Kangasniemi",
         "region_id": 9
     },
     {
         "municipality_id": 491,
-        "location_name": "Mikkeli",
+        "object_name": "Mikkeli",
         "region_id": 9
     },
     {
         "municipality_id": 507,
-        "location_name": "Mäntyharju",
+        "object_name": "Mäntyharju",
         "region_id": 9
     },
     {
         "municipality_id": 588,
-        "location_name": "Pertunmaa",
+        "object_name": "Pertunmaa",
         "region_id": 9
     },
     {
         "municipality_id": 593,
-        "location_name": "Pieksämäki",
+        "object_name": "Pieksämäki",
         "region_id": 9
     },
     {
         "municipality_id": 623,
-        "location_name": "Puumala",
+        "object_name": "Puumala",
         "region_id": 9
     },
     {
         "municipality_id": 681,
-        "location_name": "Rantasalmi",
+        "object_name": "Rantasalmi",
         "region_id": 9
     },
     {
         "municipality_id": 740,
-        "location_name": "Savonlinna",
+        "object_name": "Savonlinna",
         "region_id": 9
     },
     {
         "municipality_id": 768,
-        "location_name": "Sulkava",
+        "object_name": "Sulkava",
         "region_id": 9
     },
     {
         "municipality_id": 140,
-        "location_name": "Iisalmi",
+        "object_name": "Iisalmi",
         "region_id": 10
     },
     {
         "municipality_id": 204,
-        "location_name": "Kaavi",
+        "object_name": "Kaavi",
         "region_id": 10
     },
     {
         "municipality_id": 239,
-        "location_name": "Keitele",
+        "object_name": "Keitele",
         "region_id": 10
     },
     {
         "municipality_id": 263,
-        "location_name": "Kiuruvesi",
+        "object_name": "Kiuruvesi",
         "region_id": 10
     },
     {
         "municipality_id": 297,
-        "location_name": "Kuopio",
+        "object_name": "Kuopio",
         "region_id": 10
     },
     {
         "municipality_id": 402,
-        "location_name": "Lapinlahti",
+        "object_name": "Lapinlahti",
         "region_id": 10
     },
     {
         "municipality_id": 420,
-        "location_name": "Leppävirta",
+        "object_name": "Leppävirta",
         "region_id": 10
     },
     {
         "municipality_id": 595,
-        "location_name": "Pielavesi",
+        "object_name": "Pielavesi",
         "region_id": 10
     },
     {
         "municipality_id": 686,
-        "location_name": "Rautalampi",
+        "object_name": "Rautalampi",
         "region_id": 10
     },
     {
         "municipality_id": 687,
-        "location_name": "Rautavaara",
+        "object_name": "Rautavaara",
         "region_id": 10
     },
     {
         "municipality_id": 749,
-        "location_name": "Siilinjärvi",
+        "object_name": "Siilinjärvi",
         "region_id": 10
     },
     {
         "municipality_id": 762,
-        "location_name": "Sonkajärvi",
+        "object_name": "Sonkajärvi",
         "region_id": 10
     },
     {
         "municipality_id": 778,
-        "location_name": "Suonenjoki",
+        "object_name": "Suonenjoki",
         "region_id": 10
     },
     {
         "municipality_id": 844,
-        "location_name": "Tervo",
+        "object_name": "Tervo",
         "region_id": 10
     },
     {
         "municipality_id": 857,
-        "location_name": "Tuusniemi",
+        "object_name": "Tuusniemi",
         "region_id": 10
     },
     {
         "municipality_id": 915,
-        "location_name": "Varkaus",
+        "object_name": "Varkaus",
         "region_id": 10
     },
     {
         "municipality_id": 921,
-        "location_name": "Vesanto",
+        "object_name": "Vesanto",
         "region_id": 10
     },
     {
         "municipality_id": 925,
-        "location_name": "Vieremä",
+        "object_name": "Vieremä",
         "region_id": 10
     },
     {
         "municipality_id": 146,
-        "location_name": "Ilomantsi",
+        "object_name": "Ilomantsi",
         "region_id": 11
     },
     {
         "municipality_id": 167,
-        "location_name": "Joensuu",
+        "object_name": "Joensuu",
         "region_id": 11
     },
     {
         "municipality_id": 176,
-        "location_name": "Juuka",
+        "object_name": "Juuka",
         "region_id": 11
     },
     {
         "municipality_id": 260,
-        "location_name": "Kitee",
+        "object_name": "Kitee",
         "region_id": 11
     },
     {
         "municipality_id": 276,
-        "location_name": "Kontiolahti",
+        "object_name": "Kontiolahti",
         "region_id": 11
     },
     {
         "municipality_id": 309,
-        "location_name": "Outokumpu",
+        "object_name": "Outokumpu",
         "region_id": 11
     },
     {
         "municipality_id": 422,
-        "location_name": "Lieksa",
+        "object_name": "Lieksa",
         "region_id": 11
     },
     {
         "municipality_id": 426,
-        "location_name": "Liperi",
+        "object_name": "Liperi",
         "region_id": 11
     },
     {
         "municipality_id": 541,
-        "location_name": "Nurmes",
+        "object_name": "Nurmes",
         "region_id": 11
     },
     {
         "municipality_id": 607,
-        "location_name": "Polvijärvi",
+        "object_name": "Polvijärvi",
         "region_id": 11
     },
     {
         "municipality_id": 707,
-        "location_name": "Rääkkylä",
+        "object_name": "Rääkkylä",
         "region_id": 11
     },
     {
         "municipality_id": 848,
-        "location_name": "Tohmajärvi",
+        "object_name": "Tohmajärvi",
         "region_id": 11
     },
     {
         "municipality_id": 911,
-        "location_name": "Valtimo",
+        "object_name": "Valtimo",
         "region_id": 11
     },
     {
         "municipality_id": 77,
-        "location_name": "Hankasalmi",
+        "object_name": "Hankasalmi",
         "region_id": 12
     },
     {
         "municipality_id": 172,
-        "location_name": "Joutsa",
+        "object_name": "Joutsa",
         "region_id": 12
     },
     {
         "municipality_id": 179,
-        "location_name": "Jyväskylä",
+        "object_name": "Jyväskylä",
         "region_id": 12
     },
     {
         "municipality_id": 182,
-        "location_name": "Jämsä",
+        "object_name": "Jämsä",
         "region_id": 12
     },
     {
         "municipality_id": 216,
-        "location_name": "Kannonkoski",
+        "object_name": "Kannonkoski",
         "region_id": 12
     },
     {
         "municipality_id": 226,
-        "location_name": "Karstula",
+        "object_name": "Karstula",
         "region_id": 12
     },
     {
         "municipality_id": 249,
-        "location_name": "Keuruu",
+        "object_name": "Keuruu",
         "region_id": 12
     },
     {
         "municipality_id": 256,
-        "location_name": "Kinnula",
+        "object_name": "Kinnula",
         "region_id": 12
     },
     {
         "municipality_id": 265,
-        "location_name": "Kivijärvi",
+        "object_name": "Kivijärvi",
         "region_id": 12
     },
     {
         "municipality_id": 275,
-        "location_name": "Konnevesi",
+        "object_name": "Konnevesi",
         "region_id": 12
     },
     {
         "municipality_id": 291,
-        "location_name": "Kuhmoinen",
+        "object_name": "Kuhmoinen",
         "region_id": 12
     },
     {
         "municipality_id": 312,
-        "location_name": "Kyyjärvi",
+        "object_name": "Kyyjärvi",
         "region_id": 12
     },
     {
         "municipality_id": 410,
-        "location_name": "Laukaa",
+        "object_name": "Laukaa",
         "region_id": 12
     },
     {
         "municipality_id": 435,
-        "location_name": "Luhanka",
+        "object_name": "Luhanka",
         "region_id": 12
     },
     {
         "municipality_id": 495,
-        "location_name": "Multia",
+        "object_name": "Multia",
         "region_id": 12
     },
     {
         "municipality_id": 500,
-        "location_name": "Muurame",
+        "object_name": "Muurame",
         "region_id": 12
     },
     {
         "municipality_id": 592,
-        "location_name": "Petäjävesi",
+        "object_name": "Petäjävesi",
         "region_id": 12
     },
     {
         "municipality_id": 601,
-        "location_name": "Pihtipudas",
+        "object_name": "Pihtipudas",
         "region_id": 12
     },
     {
         "municipality_id": 729,
-        "location_name": "Saarijärvi",
+        "object_name": "Saarijärvi",
         "region_id": 12
     },
     {
         "municipality_id": 850,
-        "location_name": "Toivakka",
+        "object_name": "Toivakka",
         "region_id": 12
     },
     {
         "municipality_id": 892,
-        "location_name": "Uurainen",
+        "object_name": "Uurainen",
         "region_id": 12
     },
     {
         "municipality_id": 931,
-        "location_name": "Viitasaari",
+        "object_name": "Viitasaari",
         "region_id": 12
     },
     {
         "municipality_id": 992,
-        "location_name": "Äänekoski",
+        "object_name": "Äänekoski",
         "region_id": 12
     },
     {
         "municipality_id": 5,
-        "location_name": "Alajärvi",
+        "object_name": "Alajärvi",
         "region_id": 13
     },
     {
         "municipality_id": 10,
-        "location_name": "Alavus",
+        "object_name": "Alavus",
         "region_id": 13
     },
     {
         "municipality_id": 52,
-        "location_name": "Evijärvi",
+        "object_name": "Evijärvi",
         "region_id": 13
     },
     {
         "municipality_id": 145,
-        "location_name": "Ilmajoki",
+        "object_name": "Ilmajoki",
         "region_id": 13
     },
     {
         "municipality_id": 151,
-        "location_name": "Isojoki",
+        "object_name": "Isojoki",
         "region_id": 13
     },
     {
         "municipality_id": 218,
-        "location_name": "Karijoki",
+        "object_name": "Karijoki",
         "region_id": 13
     },
     {
         "municipality_id": 232,
-        "location_name": "Kauhajoki",
+        "object_name": "Kauhajoki",
         "region_id": 13
     },
     {
         "municipality_id": 233,
-        "location_name": "Kauhava",
+        "object_name": "Kauhava",
         "region_id": 13
     },
     {
         "municipality_id": 300,
-        "location_name": "Kuortane",
+        "object_name": "Kuortane",
         "region_id": 13
     },
     {
         "municipality_id": 301,
-        "location_name": "Kurikka",
+        "object_name": "Kurikka",
         "region_id": 13
     },
     {
         "municipality_id": 403,
-        "location_name": "Lappajärvi",
+        "object_name": "Lappajärvi",
         "region_id": 13
     },
     {
         "municipality_id": 408,
-        "location_name": "Lapua",
+        "object_name": "Lapua",
         "region_id": 13
     },
     {
         "municipality_id": 743,
-        "location_name": "Seinäjoki",
+        "object_name": "Seinäjoki",
         "region_id": 13
     },
     {
         "municipality_id": 759,
-        "location_name": "Soini",
+        "object_name": "Soini",
         "region_id": 13
     },
     {
         "municipality_id": 846,
-        "location_name": "Teuva",
+        "object_name": "Teuva",
         "region_id": 13
     },
     {
         "municipality_id": 934,
-        "location_name": "Vimpeli",
+        "object_name": "Vimpeli",
         "region_id": 13
     },
     {
         "municipality_id": 989,
-        "location_name": "Ähtäri",
+        "object_name": "Ähtäri",
         "region_id": 13
     },
     {
         "municipality_id": 152,
-        "location_name": "Isokyrö",
+        "object_name": "Isokyrö",
         "region_id": 14
     },
     {
         "municipality_id": 231,
-        "location_name": "Kaskinen",
+        "object_name": "Kaskinen",
         "region_id": 14
     },
     {
         "municipality_id": 280,
-        "location_name": "Korsnäs",
+        "object_name": "Korsnäs",
         "region_id": 14
     },
     {
         "municipality_id": 287,
-        "location_name": "Kristiinankaupunki",
+        "object_name": "Kristiinankaupunki",
         "region_id": 14
     },
     {
         "municipality_id": 288,
-        "location_name": "Kruunupyy",
+        "object_name": "Kruunupyy",
         "region_id": 14
     },
     {
         "municipality_id": 399,
-        "location_name": "Laihia",
+        "object_name": "Laihia",
         "region_id": 14
     },
     {
         "municipality_id": 440,
-        "location_name": "Luoto",
+        "object_name": "Luoto",
         "region_id": 14
     },
     {
         "municipality_id": 475,
-        "location_name": "Maalahti",
+        "object_name": "Maalahti",
         "region_id": 14
     },
     {
         "municipality_id": 499,
-        "location_name": "Mustasaari",
+        "object_name": "Mustasaari",
         "region_id": 14
     },
     {
         "municipality_id": 545,
-        "location_name": "Närpiö",
+        "object_name": "Närpiö",
         "region_id": 14
     },
     {
         "municipality_id": 598,
-        "location_name": "Pietarsaari",
+        "object_name": "Pietarsaari",
         "region_id": 14
     },
     {
         "municipality_id": 599,
-        "location_name": "Pedersören kunta",
+        "object_name": "Pedersören kunta",
         "region_id": 14
     },
     {
         "municipality_id": 893,
-        "location_name": "Uusikaarlepyy",
+        "object_name": "Uusikaarlepyy",
         "region_id": 14
     },
     {
         "municipality_id": 905,
-        "location_name": "Vaasa",
+        "object_name": "Vaasa",
         "region_id": 14
     },
     {
         "municipality_id": 946,
-        "location_name": "Vöyri",
+        "object_name": "Vöyri",
         "region_id": 14
     },
     {
         "municipality_id": 74,
-        "location_name": "Halsua",
+        "object_name": "Halsua",
         "region_id": 15
     },
     {
         "municipality_id": 217,
-        "location_name": "Kannus",
+        "object_name": "Kannus",
         "region_id": 15
     },
     {
         "municipality_id": 236,
-        "location_name": "Kaustinen",
+        "object_name": "Kaustinen",
         "region_id": 15
     },
     {
         "municipality_id": 272,
-        "location_name": "Kokkola",
+        "object_name": "Kokkola",
         "region_id": 15
     },
     {
         "municipality_id": 421,
-        "location_name": "Lestijärvi",
+        "object_name": "Lestijärvi",
         "region_id": 15
     },
     {
         "municipality_id": 584,
-        "location_name": "Perho",
+        "object_name": "Perho",
         "region_id": 15
     },
     {
         "municipality_id": 849,
-        "location_name": "Toholampi",
+        "object_name": "Toholampi",
         "region_id": 15
     },
     {
         "municipality_id": 924,
-        "location_name": "Veteli",
+        "object_name": "Veteli",
         "region_id": 15
     },
     {
         "municipality_id": 9,
-        "location_name": "Alavieska",
+        "object_name": "Alavieska",
         "region_id": 16
     },
     {
         "municipality_id": 69,
-        "location_name": "Haapajärvi",
+        "object_name": "Haapajärvi",
         "region_id": 16
     },
     {
         "municipality_id": 71,
-        "location_name": "Haapavesi",
+        "object_name": "Haapavesi",
         "region_id": 16
     },
     {
         "municipality_id": 72,
-        "location_name": "Hailuoto",
+        "object_name": "Hailuoto",
         "region_id": 16
     },
     {
         "municipality_id": 139,
-        "location_name": "Ii",
+        "object_name": "Ii",
         "region_id": 16
     },
     {
         "municipality_id": 208,
-        "location_name": "Kalajoki",
+        "object_name": "Kalajoki",
         "region_id": 16
     },
     {
         "municipality_id": 244,
-        "location_name": "Kempele",
+        "object_name": "Kempele",
         "region_id": 16
     },
     {
         "municipality_id": 305,
-        "location_name": "Kuusamo",
+        "object_name": "Kuusamo",
         "region_id": 16
     },
     {
         "municipality_id": 317,
-        "location_name": "Kärsämäki",
+        "object_name": "Kärsämäki",
         "region_id": 16
     },
     {
         "municipality_id": 425,
-        "location_name": "Liminka",
+        "object_name": "Liminka",
         "region_id": 16
     },
     {
         "municipality_id": 436,
-        "location_name": "Lumijoki",
+        "object_name": "Lumijoki",
         "region_id": 16
     },
     {
         "municipality_id": 483,
-        "location_name": "Merijärvi",
+        "object_name": "Merijärvi",
         "region_id": 16
     },
     {
         "municipality_id": 494,
-        "location_name": "Muhos",
+        "object_name": "Muhos",
         "region_id": 16
     },
     {
         "municipality_id": 535,
-        "location_name": "Nivala",
+        "object_name": "Nivala",
         "region_id": 16
     },
     {
         "municipality_id": 563,
-        "location_name": "Oulainen",
+        "object_name": "Oulainen",
         "region_id": 16
     },
     {
         "municipality_id": 564,
-        "location_name": "Oulu",
+        "object_name": "Oulu",
         "region_id": 16
     },
     {
         "municipality_id": 615,
-        "location_name": "Pudasjärvi",
+        "object_name": "Pudasjärvi",
         "region_id": 16
     },
     {
         "municipality_id": 625,
-        "location_name": "Pyhäjoki",
+        "object_name": "Pyhäjoki",
         "region_id": 16
     },
     {
         "municipality_id": 626,
-        "location_name": "Pyhäjärvi",
+        "object_name": "Pyhäjärvi",
         "region_id": 16
     },
     {
         "municipality_id": 630,
-        "location_name": "Pyhäntä",
+        "object_name": "Pyhäntä",
         "region_id": 16
     },
     {
         "municipality_id": 678,
-        "location_name": "Raahe",
+        "object_name": "Raahe",
         "region_id": 16
     },
     {
         "municipality_id": 691,
-        "location_name": "Reisjärvi",
+        "object_name": "Reisjärvi",
         "region_id": 16
     },
     {
         "municipality_id": 746,
-        "location_name": "Sievi",
+        "object_name": "Sievi",
         "region_id": 16
     },
     {
         "municipality_id": 748,
-        "location_name": "Siikajoki",
+        "object_name": "Siikajoki",
         "region_id": 16
     },
     {
         "municipality_id": 785,
-        "location_name": "Vaala",
+        "object_name": "Vaala",
         "region_id": 16
     },
     {
         "municipality_id": 791,
-        "location_name": "Siikalatva",
+        "object_name": "Siikalatva",
         "region_id": 16
     },
     {
         "municipality_id": 832,
-        "location_name": "Taivalkoski",
+        "object_name": "Taivalkoski",
         "region_id": 16
     },
     {
         "municipality_id": 859,
-        "location_name": "Tyrnävä",
+        "object_name": "Tyrnävä",
         "region_id": 16
     },
     {
         "municipality_id": 889,
-        "location_name": "Utajärvi",
+        "object_name": "Utajärvi",
         "region_id": 16
     },
     {
         "municipality_id": 977,
-        "location_name": "Ylivieska",
+        "object_name": "Ylivieska",
         "region_id": 16
     },
     {
         "municipality_id": 105,
-        "location_name": "Hyrynsalmi",
+        "object_name": "Hyrynsalmi",
         "region_id": 17
     },
     {
         "municipality_id": 205,
-        "location_name": "Kajaani",
+        "object_name": "Kajaani",
         "region_id": 17
     },
     {
         "municipality_id": 290,
-        "location_name": "Kuhmo",
+        "object_name": "Kuhmo",
         "region_id": 17
     },
     {
         "municipality_id": 578,
-        "location_name": "Paltamo",
+        "object_name": "Paltamo",
         "region_id": 17
     },
     {
         "municipality_id": 620,
-        "location_name": "Puolanka",
+        "object_name": "Puolanka",
         "region_id": 17
     },
     {
         "municipality_id": 697,
-        "location_name": "Ristijärvi",
+        "object_name": "Ristijärvi",
         "region_id": 17
     },
     {
         "municipality_id": 765,
-        "location_name": "Sotkamo",
+        "object_name": "Sotkamo",
         "region_id": 17
     },
     {
         "municipality_id": 777,
-        "location_name": "Suomussalmi",
+        "object_name": "Suomussalmi",
         "region_id": 17
     },
     {
         "municipality_id": 47,
-        "location_name": "Enontekiö",
+        "object_name": "Enontekiö",
         "region_id": 18
     },
     {
         "municipality_id": 148,
-        "location_name": "Inari",
+        "object_name": "Inari",
         "region_id": 18
     },
     {
         "municipality_id": 240,
-        "location_name": "Kemi",
+        "object_name": "Kemi",
         "region_id": 18
     },
     {
         "municipality_id": 241,
-        "location_name": "Keminmaa",
+        "object_name": "Keminmaa",
         "region_id": 18
     },
     {
         "municipality_id": 261,
-        "location_name": "Kittilä",
+        "object_name": "Kittilä",
         "region_id": 18
     },
     {
         "municipality_id": 273,
-        "location_name": "Kolari",
+        "object_name": "Kolari",
         "region_id": 18
     },
     {
         "municipality_id": 320,
-        "location_name": "Kemijärvi",
+        "object_name": "Kemijärvi",
         "region_id": 18
     },
     {
         "municipality_id": 498,
-        "location_name": "Muonio",
+        "object_name": "Muonio",
         "region_id": 18
     },
     {
         "municipality_id": 583,
-        "location_name": "Pelkosenniemi",
+        "object_name": "Pelkosenniemi",
         "region_id": 18
     },
     {
         "municipality_id": 614,
-        "location_name": "Posio",
+        "object_name": "Posio",
         "region_id": 18
     },
     {
         "municipality_id": 683,
-        "location_name": "Ranua",
+        "object_name": "Ranua",
         "region_id": 18
     },
     {
         "municipality_id": 698,
-        "location_name": "Rovaniemi",
+        "object_name": "Rovaniemi",
         "region_id": 18
     },
     {
         "municipality_id": 732,
-        "location_name": "Salla",
+        "object_name": "Salla",
         "region_id": 18
     },
     {
         "municipality_id": 742,
-        "location_name": "Savukoski",
+        "object_name": "Savukoski",
         "region_id": 18
     },
     {
         "municipality_id": 751,
-        "location_name": "Simo",
+        "object_name": "Simo",
         "region_id": 18
     },
     {
         "municipality_id": 758,
-        "location_name": "Sodankylä",
+        "object_name": "Sodankylä",
         "region_id": 18
     },
     {
         "municipality_id": 845,
-        "location_name": "Tervola",
+        "object_name": "Tervola",
         "region_id": 18
     },
     {
         "municipality_id": 851,
-        "location_name": "Tornio",
+        "object_name": "Tornio",
         "region_id": 18
     },
     {
         "municipality_id": 854,
-        "location_name": "Pello",
+        "object_name": "Pello",
         "region_id": 18
     },
     {
         "municipality_id": 890,
-        "location_name": "Utsjoki",
+        "object_name": "Utsjoki",
         "region_id": 18
     },
     {
         "municipality_id": 976,
-        "location_name": "Ylitornio",
+        "object_name": "Ylitornio",
         "region_id": 18
     },
     {
         "municipality_id": 35,
-        "location_name": "Brändö",
+        "object_name": "Brändö",
         "region_id": 19
     },
     {
         "municipality_id": 43,
-        "location_name": "Eckerö",
+        "object_name": "Eckerö",
         "region_id": 19
     },
     {
         "municipality_id": 60,
-        "location_name": "Finström",
+        "object_name": "Finström",
         "region_id": 19
     },
     {
         "municipality_id": 62,
-        "location_name": "Föglö",
+        "object_name": "Föglö",
         "region_id": 19
     },
     {
         "municipality_id": 65,
-        "location_name": "Geta",
+        "object_name": "Geta",
         "region_id": 19
     },
     {
         "municipality_id": 76,
-        "location_name": "Hammarland",
+        "object_name": "Hammarland",
         "region_id": 19
     },
     {
         "municipality_id": 170,
-        "location_name": "Jomala",
+        "object_name": "Jomala",
         "region_id": 19
     },
     {
         "municipality_id": 295,
-        "location_name": "Kumlinge",
+        "object_name": "Kumlinge",
         "region_id": 19
     },
     {
         "municipality_id": 318,
-        "location_name": "Kökar",
+        "object_name": "Kökar",
         "region_id": 19
     },
     {
         "municipality_id": 417,
-        "location_name": "Lemland",
+        "object_name": "Lemland",
         "region_id": 19
     },
     {
         "municipality_id": 438,
-        "location_name": "Lumparland",
+        "object_name": "Lumparland",
         "region_id": 19
     },
     {
         "municipality_id": 478,
-        "location_name": "Maarianhamina",
+        "object_name": "Maarianhamina",
         "region_id": 19
     },
     {
         "municipality_id": 736,
-        "location_name": "Saltvik",
+        "object_name": "Saltvik",
         "region_id": 19
     },
     {
         "municipality_id": 766,
-        "location_name": "Sottunga",
+        "object_name": "Sottunga",
         "region_id": 19
     },
     {
         "municipality_id": 771,
-        "location_name": "Sund",
+        "object_name": "Sund",
         "region_id": 19
     },
     {
         "municipality_id": 941,
-        "location_name": "Vårdö",
+        "object_name": "Vårdö",
         "region_id": 19
     }
 ]

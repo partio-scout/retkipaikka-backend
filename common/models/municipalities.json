@@ -7,7 +7,7 @@
             "id": true,
             "required": true
         },
-        "location_name": {
+        "object_name": {
             "type": "string",
             "required": true
         },

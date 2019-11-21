@@ -17,7 +17,7 @@
         "triplocations": {
             "type": "belongsTo",
             "model": "Triplocations",
-            "foreignKey": "locationId"
+            "foreignKey": "location_id"
         }
     },
     "acls": [],

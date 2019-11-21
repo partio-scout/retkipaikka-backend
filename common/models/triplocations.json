@@ -81,7 +81,7 @@
       "model": "Municipalities",
       "foreignKey": "location_municipality"
     },
-    "region": {
+    "regions": {
       "type": "belongsTo",
       "model": "Regions",
       "foreignKey": "location_region"
@@ -89,7 +89,7 @@
     "images": {
       "type": "hasMany",
       "model": "Images",
-      "foreignKey": "locationId"
+      "foreignKey": "location_id"
     }
   },
   "mixins": {

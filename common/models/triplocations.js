@@ -26,19 +26,42 @@ module.exports = function (Triplocations) {
                     scope: { // further filter categories
                         fields: ['object_name']
                     }
-                }
+                },
+                {
+                    relation: "regions",
+                    scope: { // further filter regions
+                        fields: ['object_name']
+                    }
+                },
+                {
+                    relation: "municipalities",
+                    scope: { // further filter municipalities
+                        fields: ['object_name']
+                    }
+                },
 
 
             ]
         };
-
+        // "location_municipality": {
+        //     "type": "number",
+        //     "required": false
+        //   },
+        //   "location_region": {
+        //     "type": "number",
+        //     "required": true
+        //   },    
         let locations = await Triplocations.find(query).then(obj => {
             let objs = []
             for (let i = 0; i < obj.length; ++i) {
                 let trip = obj[i];
                 trip = JSON.parse(JSON.stringify(trip));
                 trip.location_category = trip.categories.object_name;
+                trip.location_region = trip.regions.object_name;
+                trip.location_municipality = trip.location_municipality ? trip.municipalities.object_name : null;
                 trip["filters"] = trip["filters"].map(t => t.object_name)
+                delete trip.regions;
+                delete trip.municipalities;
                 delete trip.categories
                 objs.push(trip);
             }
@@ -89,8 +112,8 @@ module.exports = function (Triplocations) {
         if (dataFilters) {
             for (let i = 0; i < dataFilters.length; ++i) {
                 let relationObject = {
-                    locationId: uuid,
-                    filterId: dataFilters[i]
+                    location_id: uuid,
+                    filter_id: dataFilters[i]
                 }
                 await Locationfeatures.create(relationObject);
             }
@@ -107,7 +130,7 @@ module.exports = function (Triplocations) {
         let newObject = JSON.parse(JSON.stringify(locationData));
         const locationuuid = locationData.location_id;
         let query = {
-            locationId: locationuuid
+            location_id: locationuuid
         };
         if (locationData.filters) {
             if (locationData.filters.length >= 0) {
@@ -116,8 +139,8 @@ module.exports = function (Triplocations) {
 
                     for (let i = 0; i < dataFilters.length; ++i) {
                         let relationObject = {
-                            locationId: locationuuid,
-                            filterId: dataFilters[i]
+                            location_id: locationuuid,
+                            filter_id: dataFilters[i]
                         }
                         await Locationfeatures.create(relationObject);
                     }
@@ -146,7 +169,7 @@ module.exports = function (Triplocations) {
         let Locationfeatures = Triplocations.app.models.Locationfeatures;
         const locationuuid = locationData.location_id;
         let query = {
-            locationId: locationuuid
+            location_id: locationuuid
         };
 
         Locationfeatures.destroyAll(query).then(res => {
