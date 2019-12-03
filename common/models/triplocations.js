@@ -78,6 +78,8 @@ module.exports = function (Triplocations) {
         let Locationfeatures = Triplocations.app.models.Locationfeatures;
         let dataFilters = locationData.filters;
         //let newObj = getLocationSchema()
+        var fileSystem = Triplocations.app.models.Images;
+        // console.log(fileSystem)
 
         await Categories.exists(locationData.location_category).then(res => {
             if (!res) {
@@ -103,7 +105,7 @@ module.exports = function (Triplocations) {
         newObject["location_id"] = uuid;
 
 
-        Triplocations.create(newObject).then(res => {
+        await Triplocations.create(newObject).then(res => {
 
         }).catch(err => {
             console.error(err);
@@ -115,13 +117,16 @@ module.exports = function (Triplocations) {
                     location_id: uuid,
                     filter_id: dataFilters[i]
                 }
-                await Locationfeatures.create(relationObject);
+                await Locationfeatures.create(relationObject)
+
             }
+
         }
+        await fileSystem.createContainer({ "name": uuid })
 
 
         console.log("1 location succesfully added")
-        return "success"
+        return uuid
     }
 
 
