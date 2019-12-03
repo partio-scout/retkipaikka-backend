@@ -1,6 +1,6 @@
 {
     "name": "Images",
-    "base": "PersistedModel",
+    "base": "Model",
     "properties": {
         "id": {
             "type": "number",
@@ -13,13 +13,7 @@
         }
     },
     "validations": [],
-    "relations": {
-        "triplocations": {
-            "type": "belongsTo",
-            "model": "Triplocations",
-            "foreignKey": "location_id"
-        }
-    },
+    "relations": {},
     "acls": [],
     "methods": {}
 }

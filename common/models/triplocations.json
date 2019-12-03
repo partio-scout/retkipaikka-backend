@@ -60,6 +60,10 @@
     "location_mail": {
       "type": "string",
       "required": false
+    },
+    "location_imagecount": {
+      "type": "number",
+      "default": 0
     }
   },
   "validations": [],
@@ -85,11 +89,6 @@
       "type": "belongsTo",
       "model": "Regions",
       "foreignKey": "location_region"
-    },
-    "images": {
-      "type": "hasMany",
-      "model": "Images",
-      "foreignKey": "location_id"
     }
   },
   "mixins": {

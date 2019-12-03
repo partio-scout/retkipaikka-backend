@@ -17,6 +17,7 @@
     "loopback": "^3.22.0",
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "^6.2.0",
+    "loopback-component-storage": "^3.6.3",
     "loopback-connector-postgresql": "^3.8.0",
     "loopback-ds-timestamp-mixin": "^3.4.1",
     "loopback-softdelete-mixin4": "^1.0.8",

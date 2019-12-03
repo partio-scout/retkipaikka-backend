@@ -79,7 +79,7 @@ module.exports = function (Triplocations) {
         let dataFilters = locationData.filters;
         //let newObj = getLocationSchema()
 
-        Categories.exists(locationData.location_category).then(res => {
+        await Categories.exists(locationData.location_category).then(res => {
             if (!res) {
                 return "fail"
             }
@@ -139,7 +139,7 @@ module.exports = function (Triplocations) {
         if (locationData.filters) {
             if (locationData.filters.length >= 0) {
                 let dataFilters = locationData.filters;
-                Locationfeatures.destroyAll(query).then(async res => {
+                await Locationfeatures.destroyAll(query).then(async res => {
 
                     for (let i = 0; i < dataFilters.length; ++i) {
                         let relationObject = {
@@ -158,7 +158,7 @@ module.exports = function (Triplocations) {
         }
 
 
-        Triplocations.updateAll({ location_id: locationuuid }, newObject).then(res => {
+        await Triplocations.updateAll({ location_id: locationuuid }, newObject).then(res => {
             return "success"
         }).catch(err => {
             console.error(err);
@@ -176,7 +176,7 @@ module.exports = function (Triplocations) {
             location_id: locationuuid
         };
 
-        Locationfeatures.destroyAll(query).then(res => {
+        await Locationfeatures.destroyAll(query).then(res => {
             Triplocations.destroyById(locationuuid)
         }).catch(err => {
             console.error(err);
