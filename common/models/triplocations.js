@@ -6,6 +6,7 @@ module.exports = function (Triplocations) {
 
     Triplocations.fetchLocations = async function (filter, req, res) {
         let wFilter = {}
+        var fileSystem = Triplocations.app.models.Images;
         if (filter) {
             wFilter = filter.where ? filter.where : {};
         }
@@ -51,11 +52,13 @@ module.exports = function (Triplocations) {
         //     "type": "number",
         //     "required": true
         //   },    
-        let locations = await Triplocations.find(query).then(obj => {
+        let locations = await Triplocations.find(query).then(async obj => {
             let objs = []
             for (let i = 0; i < obj.length; ++i) {
                 let trip = obj[i];
                 trip = JSON.parse(JSON.stringify(trip));
+                let imagesArr = await fileSystem.getFiles(trip.location_id);
+                trip.images = imagesArr.map(val => val.name);
                 trip.location_category = trip.categories.object_name;
                 trip.location_region = trip.regions.object_name;
                 trip.location_municipality = trip.location_municipality ? trip.municipalities.object_name : null;
