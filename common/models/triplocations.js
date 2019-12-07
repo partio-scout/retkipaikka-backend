@@ -140,7 +140,6 @@ module.exports = function (Triplocations) {
         let query = {
             location_id: locationuuid
         };
-        console.log(locationData);
         if (locationData.location_region && !locationData.location_municipality) {
             newObject.location_municipality = null;
         }
