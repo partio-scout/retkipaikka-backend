@@ -120,6 +120,20 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "addNewLocation"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "deleteLocation"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "editLocation"
     }
   ],
   "methods": {}
