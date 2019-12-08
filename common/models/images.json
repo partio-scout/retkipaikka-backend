@@ -41,6 +41,13 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "download"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "destroyContainer"
     }
   ],
   "methods": {}
