@@ -106,6 +106,7 @@ module.exports = function (Triplocations) {
         delete newObject["filters"];
         const uuid = uuidv4();
         newObject["location_id"] = uuid;
+        newObject["location_accepted"] = false;
 
 
         await Triplocations.create(newObject).then(res => {
@@ -202,7 +203,7 @@ module.exports = function (Triplocations) {
 
     Triplocations.remoteMethod(
         'fetchLocations', {
-        http: { path: '/fetchlocations', verb: 'get' },
+        http: { path: '/fetchLocations', verb: 'get' },
         accepts: [
             { arg: 'filter', type: 'object', http: { source: 'query' } },
             { arg: 'req', type: 'object', http: { source: 'req' } },

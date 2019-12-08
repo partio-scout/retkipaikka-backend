@@ -11,8 +11,7 @@
       "loopback/server/mixins",
       "../common/mixins",
       "./mixins",
-      "../node_modules/loopback-ds-timestamp-mixin",
-      "../node_modules/loopback-softdelete-mixin4"
+      "../node_modules/loopback-ds-timestamp-mixin"
     ]
   },
   "User": {
@@ -24,7 +23,7 @@
   },
   "ACL": {
     "dataSource": "db",
-    "public": false
+    "public": true
   },
   "RoleMapping": {
     "dataSource": "db",
