@@ -1,6 +1,15 @@
 {
   "name": "Triplocations",
   "base": "PersistedModel",
+  "mixins": {
+    "TimeStamp": {
+      "createdAt": "createdAt",
+      "updatedAt": "updatedAt",
+      "required": false,
+      "validateUpsert": true,
+      "silenceWarnings": true
+    }
+  },
   "properties": {
     "location_id": {
       "type": "string",
@@ -87,15 +96,41 @@
       "foreignKey": "location_region"
     }
   },
-  "mixins": {
-    "TimeStamp": {
-      "createdAt": "createdAt",
-      "updatedAt": "updatedAt",
-      "required": false,
-      "validateUpsert": true,
-      "silenceWarnings": true
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "fetchLocations"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "addNewLocation"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "deleteLocation"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "editLocation"
     }
-  },
-  "acls": [],
+  ],
   "methods": {}
 }

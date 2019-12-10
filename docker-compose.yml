@@ -6,6 +6,8 @@ services:
             dockerfile: Dockerfile
         ports:
           - "3000:3000"
+        volumes:
+          - ../images:/home/app/images
         image: retkipaikka-backend:1
         container_name: retkipaikka-backend
         restart: always

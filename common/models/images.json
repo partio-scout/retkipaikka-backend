@@ -1,19 +1,54 @@
 {
-    "name": "Images",
-    "base": "Model",
-    "properties": {
-        "id": {
-            "type": "number",
-            "id": true,
-            "generated": true
-        },
-        "image_url": {
-            "type": "string",
-            "required": true
-        }
+  "name": "Images",
+  "base": "Model",
+  "properties": {
+    "id": {
+      "type": "number",
+      "id": true,
+      "generated": true
     },
-    "validations": [],
-    "relations": {},
-    "acls": [],
-    "methods": {}
+    "image_url": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "upload"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "removeFile"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "download"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "destroyContainer"
+    }
+  ],
+  "methods": {}
 }

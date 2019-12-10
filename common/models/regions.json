@@ -1,30 +1,43 @@
 {
-    "name": "Regions",
-    "base": "PersistedModel",
-    "properties": {
-        "region_id": {
-            "type": "number",
-            "id": true,
-            "required": true
-        },
-        "object_name": {
-            "type": "string",
-            "required": true
-        }
+  "name": "Regions",
+  "base": "PersistedModel",
+  "properties": {
+    "region_id": {
+      "type": "number",
+      "id": true,
+      "required": true
     },
-    "validations": [],
-    "relations": {
-        "municipalities": {
-            "type": "hasMany",
-            "model": "Municipalities",
-            "foreignKey": "region_id"
-        },
-        "triplocations": {
-            "type": "hasMany",
-            "model": "Triplocations",
-            "foreignKey": "location_region"
-        }
+    "object_name": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "municipalities": {
+      "type": "hasMany",
+      "model": "Municipalities",
+      "foreignKey": "region_id"
     },
-    "acls": [],
-    "methods": {}
+    "triplocations": {
+      "type": "hasMany",
+      "model": "Triplocations",
+      "foreignKey": "location_region"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
 }
