@@ -14,7 +14,6 @@ module.exports = function (Triplocations) {
         let query = {
             where: wFilter,
             include: [
-
                 {
                     relation: "filters",
                     scope: { // further filter filters
@@ -44,14 +43,7 @@ module.exports = function (Triplocations) {
 
             ]
         };
-        // "location_municipality": {
-        //     "type": "number",
-        //     "required": false
-        //   },
-        //   "location_region": {
-        //     "type": "number",
-        //     "required": true
-        //   },    
+
         let locations = await Triplocations.find(query).then(async obj => {
             let objs = []
             for (let i = 0; i < obj.length; ++i) {
@@ -80,9 +72,7 @@ module.exports = function (Triplocations) {
         let Categories = Triplocations.app.models.Categories;
         let Locationfeatures = Triplocations.app.models.Locationfeatures;
         let dataFilters = locationData.filters;
-        //let newObj = getLocationSchema()
         var fileSystem = Triplocations.app.models.Images;
-        // console.log(fileSystem)
 
         await Categories.exists(locationData.location_category).then(res => {
             if (!res) {

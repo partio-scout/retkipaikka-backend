@@ -60,10 +60,6 @@
     "location_mail": {
       "type": "string",
       "required": false
-    },
-    "location_imagecount": {
-      "type": "number",
-      "default": 0
     }
   },
   "validations": [],

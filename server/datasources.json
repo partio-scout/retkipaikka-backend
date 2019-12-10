@@ -1,6 +1,6 @@
 {
   "db": {
-    "host": "localhost",
+    "host": "db",
     "port": 5432,
     "url": "postgres://postgres:tuni@localhost:5432/retkipaikka_beta?ssl=false",
     "database": "retkipaikka_beta",
