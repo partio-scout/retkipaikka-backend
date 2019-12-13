@@ -125,6 +125,7 @@ module.exports = function (Triplocations) {
 
 
     Triplocations.editLocation = async function (locationData, req, res) {
+        console.log(locationData);
         let Locationfeatures = Triplocations.app.models.Locationfeatures;
         let newObject = JSON.parse(JSON.stringify(locationData));
         const locationuuid = locationData.location_id;
@@ -208,7 +209,7 @@ module.exports = function (Triplocations) {
         'editLocation', {
         http: { path: '/editLocation', verb: 'patch' },
         accepts: [
-            { arg: 'locationData', type: 'object', http: { source: 'query' } },
+            { arg: 'locationData', type: 'object', http: { source: 'body' } },
             { arg: 'req', type: 'object', http: { source: 'req' } },
             { arg: 'res', type: 'object', http: { source: 'res' } }
         ],
@@ -221,7 +222,7 @@ module.exports = function (Triplocations) {
         'addNewLocation', {
         http: { path: '/addNewLocation', verb: 'post' },
         accepts: [
-            { arg: 'locationData', type: 'object', http: { source: 'query' } },
+            { arg: 'locationData', type: 'object', http: { source: 'body' } },
             { arg: 'req', type: 'object', http: { source: 'req' } },
             { arg: 'res', type: 'object', http: { source: 'res' } }
         ],
