@@ -66,45 +66,50 @@ module.exports = function (Triplocations) {
         return locations;
     };
 
+    const checkModelExists = async function (model, id) {
+        let response = await model.exists(id);
+        return response;
+    }
+
+
     Triplocations.addNewLocation = async function (locationData, req, res) {
         let newObject = JSON.parse(JSON.stringify(locationData));
         let Filters = Triplocations.app.models.Filters;
         let Categories = Triplocations.app.models.Categories;
-        let Locationfeatures = Triplocations.app.models.Locationfeatures;
-        let dataFilters = locationData.filters;
-        var fileSystem = Triplocations.app.models.Images;
-
-        await Categories.exists(locationData.location_category).then(res => {
-            if (!res) {
-                return "fail"
-            }
-        }).catch(err => {
-            console.error(err)
+        let Municipalities = Triplocations.app.models.Municipalities;
+        let Regions = Triplocations.app.models.Regions;
+        // check if inputted id's exist
+        let categoryBool = await checkModelExists(Categories, locationData.location_category);
+        let regionBool = await checkModelExists(Regions, locationData.location_region);
+        let municipalityBool = typeof locationData.location_municipality !== "undefined" ? await checkModelExists(Municipalities, locationData.location_municipality) : true;
+        if (!categoryBool || !regionBool || !municipalityBool) {
+            res.status(422);
             return "fail"
-        });
-
+        }
+        let dataFilters = locationData.filters;
+        let Locationfeatures = Triplocations.app.models.Locationfeatures;
+        var fileSystem = Triplocations.app.models.Images;
         if (dataFilters) {
             if (dataFilters.length > 0) {
                 for (let i = 0; i < dataFilters.length; ++i) {
-                    let value = await Filters.exists(dataFilters[i]);
+                    let value = await checkModelExists(Filters, dataFilters[i]); //await Filters.exists(dataFilters[i]);
                     if (!value)
-                        return "fail"
+                        res.status(422);
+                    return "fail"
                 }
             }
         }
-
         delete newObject["filters"];
         const uuid = uuidv4();
         newObject["location_id"] = uuid;
         newObject["location_accepted"] = false;
-
-
-        await Triplocations.create(newObject).then(res => {
-
-        }).catch(err => {
+        try {
+            await Triplocations.create(newObject);
+        } catch (err) {
             console.error(err);
-            return "fail"
-        });
+            res.status(err.statusCode ? err.statusCode : 422)
+            return err
+        }
         if (dataFilters) {
             for (let i = 0; i < dataFilters.length; ++i) {
                 let relationObject = {
@@ -116,16 +121,14 @@ module.exports = function (Triplocations) {
             }
 
         }
+
         await fileSystem.createContainer({ "name": uuid })
-
-
         console.log("1 location succesfully added")
         return uuid
     }
 
 
     Triplocations.editLocation = async function (locationData, req, res) {
-        console.log(locationData);
         let Locationfeatures = Triplocations.app.models.Locationfeatures;
         let newObject = JSON.parse(JSON.stringify(locationData));
         const locationuuid = locationData.location_id;
@@ -138,31 +141,34 @@ module.exports = function (Triplocations) {
         if (locationData.filters) {
             if (locationData.filters.length >= 0) {
                 let dataFilters = locationData.filters;
-                await Locationfeatures.destroyAll(query).then(async res => {
-
-                    for (let i = 0; i < dataFilters.length; ++i) {
-                        let relationObject = {
-                            location_id: locationuuid,
-                            filter_id: dataFilters[i]
+                try {
+                    await Locationfeatures.destroyAll(query).then(async res => {
+                        for (let i = 0; i < dataFilters.length; ++i) {
+                            let relationObject = {
+                                location_id: locationuuid,
+                                filter_id: dataFilters[i]
+                            }
+                            await Locationfeatures.create(relationObject);
                         }
-                        await Locationfeatures.create(relationObject);
-                    }
-                }).catch(err => {
-                    console.error(err);
-                    return "fail"
-                });
+                    })
+                } catch (err) {
+                    res.status(err.statusCode ? err.statusCode : 422)
+                    return err
+                }
+
+
+
             }
             delete newObject["filters"];
-
         }
 
-
-        await Triplocations.updateAll({ location_id: locationuuid }, newObject).then(res => {
-            return "success"
-        }).catch(err => {
-            console.error(err);
-            return "fail"
-        })
+        try {
+            await Triplocations.updateAll({ location_id: locationuuid }, newObject)
+        } catch (err) {
+            console.error(error);
+            res.status(err.statusCode ? err.statusCode : 422)
+            return err
+        }
         console.log("location succesfully updated")
         return "success"
 
@@ -174,13 +180,15 @@ module.exports = function (Triplocations) {
         let query = {
             location_id: locationuuid
         };
-
-        await Locationfeatures.destroyAll(query).then(res => {
-            Triplocations.destroyById(locationuuid)
-        }).catch(err => {
-            console.error(err);
-            return "fail"
-        });
+        try {
+            await Locationfeatures.destroyAll(query).then(res => {
+                Triplocations.destroyById(locationuuid)
+            })
+        } catch (error) {
+            console.error(error);
+            res.status(err.statusCode ? err.statusCode : 422)
+            return err
+        }
         console.log("location succesfully deleted")
         return "success"
 

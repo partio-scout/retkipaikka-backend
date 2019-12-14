@@ -23,5 +23,19 @@
       "permission": "DENY"
     }
   ],
-  "methods": {}
+  "methods": {},
+  "foreignKeys": {
+    "location_id": {
+      "name": "location_id",
+      "foreignKey": "location_id",
+      "entityKey": "location_id",
+      "entity": "Triplocations"
+    },
+    "filter_id": {
+      "name": "filter_id",
+      "foreignKey": "filter_id",
+      "entityKey": "filter_id",
+      "entity": "Filters"
+    }
+  }
 }
