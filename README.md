@@ -1,6 +1,10 @@
 # Partio-retkipaikka-loopback
 Partion retkipaikkasovelluksen backend
 
+git clone https://gitlab.tamk.cloud/courses/tietokannat/3005/jani.niittymaki.git
+
+
+
 
 Luo .env tiedosto tiedostopolun juureen
 ```
@@ -16,11 +20,25 @@ DB_POSTGRES_EMAIL = hallinta@retkipaikka.com
 DB_POSTGRES_PW = password
 ```
 
+## Ajaminen ilman dockeria
 
-Käynnistä komennolla, 
+Luo Postgresiin DB_DATABASE kentän arvon nimellä tietokanta
+
+Käynnistä komennolla,
+ ```
 nodemon -r dotenv/config --exitcrash
+```
 niin .env latautuu
 
 Jos nodemonia ei ole, asenna komennolla npm install -g nodemon
+
+## Ajaminen Dockerilla
+```
+docker-compose -f docker-compose.yml build
+```
+```
+docker-compose -f docker-compose.yml up
+```
+
 
 
