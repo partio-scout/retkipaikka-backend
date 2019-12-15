@@ -33,6 +33,8 @@ niin .env latautuu
 Jos nodemonia ei ole, asenna komennolla npm install -g nodemon
 
 ## Ajaminen Dockerilla
+
+Korvaa .env tiedoston localhost kohdasta DB_HOST ja DB_URL urlista -> db
 ```
 docker-compose -f docker-compose.yml build
 ```
