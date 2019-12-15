@@ -93,9 +93,11 @@ module.exports = function (Triplocations) {
             if (dataFilters.length > 0) {
                 for (let i = 0; i < dataFilters.length; ++i) {
                     let value = await checkModelExists(Filters, dataFilters[i]); //await Filters.exists(dataFilters[i]);
-                    if (!value)
+                    if (!value) {
                         res.status(422);
-                    return "fail"
+                        return "fail"
+                    }
+
                 }
             }
         }
@@ -110,6 +112,7 @@ module.exports = function (Triplocations) {
             res.status(err.statusCode ? err.statusCode : 422)
             return err
         }
+
         if (dataFilters) {
             for (let i = 0; i < dataFilters.length; ++i) {
                 let relationObject = {
@@ -121,7 +124,6 @@ module.exports = function (Triplocations) {
             }
 
         }
-
         await fileSystem.createContainer({ "name": uuid })
         console.log("1 location succesfully added")
         return uuid

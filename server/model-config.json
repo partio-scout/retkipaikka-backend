@@ -16,7 +16,7 @@
   },
   "User": {
     "dataSource": "db",
-    "public": true
+    "public": false
   },
   "AccessToken": {
     "dataSource": "db",
@@ -24,7 +24,7 @@
   },
   "ACL": {
     "dataSource": "db",
-    "public": true
+    "public": false
   },
   "RoleMapping": {
     "dataSource": "db",
@@ -60,5 +60,9 @@
   },
   "Municipalities": {
     "dataSource": "db"
+  },
+  "Admin": {
+    "dataSource": "db",
+    "public": true
   }
 }

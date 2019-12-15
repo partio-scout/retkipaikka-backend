@@ -11,7 +11,7 @@ services:
         image: retkipaikka-backend:1
         container_name: retkipaikka-backend
         restart: always
-        command: sh -c 'nodemon dotenv/config --exitcrash --watch common/ --watch server/' 
+        command: sh -c 'nodemon -r dotenv/config --exitcrash --watch common/ --watch server/' 
     db:
         image: "postgres"
         container_name: "retkipaikka-postgres"

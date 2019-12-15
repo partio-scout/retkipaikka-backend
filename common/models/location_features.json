@@ -1,6 +1,20 @@
 {
   "name": "Locationfeatures",
   "base": "PersistedModel",
+  "foreignKeys": {
+    "location_id": {
+      "name": "location_id",
+      "foreignKey": "location_id",
+      "entityKey": "location_id",
+      "entity": "Triplocations"
+    },
+    "filter_id": {
+      "name": "filter_id",
+      "foreignKey": "filter_id",
+      "entityKey": "filter_id",
+      "entity": "Filters"
+    }
+  },
   "properties": {},
   "validations": [],
   "relations": {
@@ -23,19 +37,5 @@
       "permission": "DENY"
     }
   ],
-  "methods": {},
-  "foreignKeys": {
-    "location_id": {
-      "name": "location_id",
-      "foreignKey": "location_id",
-      "entityKey": "location_id",
-      "entity": "Triplocations"
-    },
-    "filter_id": {
-      "name": "filter_id",
-      "foreignKey": "filter_id",
-      "entityKey": "filter_id",
-      "entity": "Filters"
-    }
-  }
+  "methods": {}
 }

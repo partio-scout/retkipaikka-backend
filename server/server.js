@@ -33,13 +33,3 @@ boot(app, __dirname, function (err) {
     app.start();
 });
 
-
-
-// "relations": {
-//   "triplocations": {
-//       "type": "hasMany",
-//       "model": "Triplocations",
-//       "foreignKey": "",
-//       "primaryKey": "category_id"
-//   }
-// },

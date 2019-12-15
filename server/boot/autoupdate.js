@@ -1,30 +1,30 @@
 
-const data = require("../scripts/locationdata.js");
-module.exports = async function (app) {
+//const data = require("../scripts/locationdata.js");
+module.exports = function (app, callback) {
     'use strict'
-    var db = app.dataSources.db;
+    let updateCount = 0;
     let modelArr = Object.keys(app.models);
+    var db = app.dataSources.db;
+    let checkLength = function () {
+        if (updateCount === modelArr.length) {
+            console.log("Ended autoupdate");
+            callback()
+
+        }
+    }
+    console.log("Started autoupdate");
     for (let i = 0; i < modelArr.length; ++i) {
         let model = modelArr[i];
         // update all models
-        // add data to Regions and Municipalities if they are empty
-        await db.autoupdate(model, function () {
+        db.autoupdate(model, function () {
             console.log("Auto-updated model " + model + " successfully.");
-            if (model === "Regions" || model === "Municipalities") {
-                app.models[model].count().then(res => {
-                    console.log(res + " entries in model " + model);
-                    if (res === 0) {
-                        let locationData = data[model];
-                        app.models[model].create(locationData).then(res => {
-                            console.log("Data added to model " + model)
-                        }).catch(err => {
-                            console.error(err);
-                        })
-
-                    }
-
-                });
-            }
+            updateCount++;
+            checkLength();
         });
+
     }
+
 }
+
+
+

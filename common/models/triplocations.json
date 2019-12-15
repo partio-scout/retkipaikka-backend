@@ -10,6 +10,26 @@
       "silenceWarnings": true
     }
   },
+  "foreignKeys": {
+    "location_municipality": {
+      "name": "location_municipality",
+      "foreignKey": "location_municipality",
+      "entityKey": "municipality_id",
+      "entity": "Municipalities"
+    },
+    "location_region": {
+      "name": "location_region",
+      "foreignKey": "location_region",
+      "entityKey": "region_id",
+      "entity": "Regions"
+    },
+    "categories": {
+      "name": "location_category",
+      "foreignKey": "location_category",
+      "entityKey": "category_id",
+      "entity": "Categories"
+    }
+  },
   "properties": {
     "location_id": {
       "type": "string",
@@ -120,37 +140,17 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "$authenticated",
+      "principalId": "admin",
       "permission": "ALLOW",
       "property": "deleteLocation"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "$authenticated",
+      "principalId": "admin",
       "permission": "ALLOW",
       "property": "editLocation"
     }
   ],
-  "methods": {},
-  "foreignKeys": {
-    "location_municipality": {
-      "name": "location_municipality",
-      "foreignKey": "location_municipality",
-      "entityKey": "municipality_id",
-      "entity": "Municipalities"
-    },
-    "location_region": {
-      "name": "location_region",
-      "foreignKey": "location_region",
-      "entityKey": "region_id",
-      "entity": "Regions"
-    },
-    "categories": {
-      "name": "location_category",
-      "foreignKey": "location_category",
-      "entityKey": "category_id",
-      "entity": "Categories"
-    }
-  }
+  "methods": {}
 }
