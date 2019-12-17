@@ -2,6 +2,8 @@
 const uuidv4 = require('uuid/v4');
 const multiparty = require('multiparty');
 const FormData = require('form-data');
+const fs = require('fs');
+const path = require('path')
 
 
 module.exports = function (Triplocations) {
@@ -13,6 +15,7 @@ module.exports = function (Triplocations) {
         if (filter) {
             wFilter = filter.where ? filter.where : {};
         }
+
 
         let query = {
             where: wFilter,
@@ -65,6 +68,7 @@ module.exports = function (Triplocations) {
             }
             return objs;
         });
+
         console.log("returned " + locations.length + " locations");
         return locations;
     };
@@ -74,14 +78,8 @@ module.exports = function (Triplocations) {
         const form = new multiparty.Form();
         form.parse(req, (err, fields, files) => {
             if (err) reject(err);
-            //console.log(files);
-            //console.log(JSON.parse(fields['object'][0]));
-            const images = files['image'] // get the file from the returned files object
-            //console.log(images);
-
-            const data = fields['object'][0]
-
-            //console.log(data);
+            const images = files['image'] // get images from the parsed object
+            const data = fields['object'][0] //get dataobject from the parsed object
             if (!data) reject('Error in data');
             else resolve([data, images]);
         });
@@ -93,16 +91,11 @@ module.exports = function (Triplocations) {
         return response;
     }
     const handleImageCreation = async function (id, imgs, res) {
-        var fileSystem = Triplocations.app.models.Images;
-        var storageSystem = Triplocations.app.dataSources.storage;
-        //console.log(storageSystem);
-
         for (let i = 0; i < imgs.length; ++i) {
             let img = imgs[i];
-            let formData = new FormData();
-            formData.append('image', img);
-            //console.log(img);
-            await fileSystem.upload(storageSystem, img, res)
+            await fs.copyFileSync(img.path, path.join(__dirname, "../../images/" + id + "/" + img.originalFilename)), (err) => {
+                if (err) throw err;
+            };
 
 
         }
@@ -165,15 +158,12 @@ module.exports = function (Triplocations) {
 
     }
     Triplocations.addNewLocation = async function (locationData, req, res) {
-        //console.log(locationData);
-        //let data = locationData[0];
-        //console.log(locationData.length);
         let data = await getFileFromRequest(locationData);
         let objData = JSON.parse(data[0]);
         let images = data[1];
         let postRes = await handleLocationPost(objData);
         if (postRes === "fail") {
-            req.status(422);
+            res.status(422);
         } else {
             if (images) {
                 await handleImageCreation(postRes, images, res)
@@ -187,7 +177,7 @@ module.exports = function (Triplocations) {
     Triplocations.addNewLocation_obj = async function (locationData, req, res) {
         let postRes = await handleLocationPost(locationData);
         if (postRes === "fail") {
-            req.status(422);
+            res.status(422);
         }
         return postRes;
 
@@ -312,7 +302,7 @@ module.exports = function (Triplocations) {
             { arg: 'req', type: 'object', http: { source: 'req' } },
             { arg: 'res', type: 'object', http: { source: 'res' } }
         ],
-        description: "Add a new instance of triplocation without images",
+        description: "Add a new instance of triplocation without images (used for testing purposes only)",
         returns: { type: String, root: true }
     });
 

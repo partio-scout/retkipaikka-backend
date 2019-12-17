@@ -142,6 +142,13 @@
       "principalType": "ROLE",
       "principalId": "admin",
       "permission": "ALLOW",
+      "property": "addNewLocation_obj"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
       "property": "deleteLocation"
     },
     {
