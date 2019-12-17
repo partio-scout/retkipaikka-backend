@@ -1,5 +1,8 @@
 'use strict'
 const uuidv4 = require('uuid/v4');
+const multiparty = require('multiparty');
+const FormData = require('form-data');
+
 
 module.exports = function (Triplocations) {
 
@@ -66,51 +69,82 @@ module.exports = function (Triplocations) {
         return locations;
     };
 
+    const getFileFromRequest = (req) => new Promise((resolve, reject) => {
+        //console.log(req);
+        const form = new multiparty.Form();
+        form.parse(req, (err, fields, files) => {
+            if (err) reject(err);
+            //console.log(files);
+            //console.log(JSON.parse(fields['object'][0]));
+            const images = files['image'] // get the file from the returned files object
+            //console.log(images);
+
+            const data = fields['object'][0]
+
+            //console.log(data);
+            if (!data) reject('Error in data');
+            else resolve([data, images]);
+        });
+    });
+
+
     const checkModelExists = async function (model, id) {
         let response = await model.exists(id);
         return response;
     }
+    const handleImageCreation = async function (id, imgs, res) {
+        var fileSystem = Triplocations.app.models.Images;
+        var storageSystem = Triplocations.app.dataSources.storage;
+        //console.log(storageSystem);
+
+        for (let i = 0; i < imgs.length; ++i) {
+            let img = imgs[i];
+            let formData = new FormData();
+            formData.append('image', img);
+            //console.log(img);
+            await fileSystem.upload(storageSystem, img, res)
 
 
-    Triplocations.addNewLocation = async function (locationData, req, res) {
-        let newObject = JSON.parse(JSON.stringify(locationData));
+        }
+    }
+    const handleLocationPost = async function (objData) {
+        let newObject = JSON.parse(JSON.stringify(objData));
         let Filters = Triplocations.app.models.Filters;
         let Categories = Triplocations.app.models.Categories;
         let Municipalities = Triplocations.app.models.Municipalities;
         let Regions = Triplocations.app.models.Regions;
         // check if inputted id's exist
-        let categoryBool = await checkModelExists(Categories, locationData.location_category);
-        let regionBool = await checkModelExists(Regions, locationData.location_region);
-        let municipalityBool = typeof locationData.location_municipality !== "undefined" ? await checkModelExists(Municipalities, locationData.location_municipality) : true;
+        let categoryBool = await checkModelExists(Categories, objData.location_category);
+        let regionBool = await checkModelExists(Regions, objData.location_region);
+        let municipalityBool = typeof objData.location_municipality !== "undefined" ? await checkModelExists(Municipalities, objData.location_municipality) : true;
         if (!categoryBool || !regionBool || !municipalityBool) {
-            res.status(422);
+            // res.status(422);
             return "fail"
         }
-        let dataFilters = locationData.filters;
+        let dataFilters = objData.filters;
         let Locationfeatures = Triplocations.app.models.Locationfeatures;
-        var fileSystem = Triplocations.app.models.Images;
         if (dataFilters) {
             if (dataFilters.length > 0) {
                 for (let i = 0; i < dataFilters.length; ++i) {
                     let value = await checkModelExists(Filters, dataFilters[i]); //await Filters.exists(dataFilters[i]);
                     if (!value) {
-                        res.status(422);
+                        //res.status(422);
                         return "fail"
                     }
 
                 }
             }
         }
-        delete newObject["filters"];
         const uuid = uuidv4();
+        delete newObject["filters"];
         newObject["location_id"] = uuid;
         newObject["location_accepted"] = false;
         try {
             await Triplocations.create(newObject);
         } catch (err) {
             console.error(err);
-            res.status(err.statusCode ? err.statusCode : 422)
-            return err
+            //res.status(err.statusCode ? err.statusCode : 422)
+            return "fail"
         }
 
         if (dataFilters) {
@@ -122,12 +156,43 @@ module.exports = function (Triplocations) {
                 await Locationfeatures.create(relationObject)
 
             }
+            let fileSystem = Triplocations.app.models.Images;
+            await fileSystem.createContainer({ "name": uuid })
 
         }
-        await fileSystem.createContainer({ "name": uuid })
         console.log("1 location succesfully added")
         return uuid
+
     }
+    Triplocations.addNewLocation = async function (locationData, req, res) {
+        //console.log(locationData);
+        //let data = locationData[0];
+        //console.log(locationData.length);
+        let data = await getFileFromRequest(locationData);
+        let objData = JSON.parse(data[0]);
+        let images = data[1];
+        let postRes = await handleLocationPost(objData);
+        if (postRes === "fail") {
+            req.status(422);
+        } else {
+            if (images) {
+                await handleImageCreation(postRes, images, res)
+            }
+
+        }
+        return postRes;
+
+    }
+
+    Triplocations.addNewLocation_obj = async function (locationData, req, res) {
+        let postRes = await handleLocationPost(locationData);
+        if (postRes === "fail") {
+            req.status(422);
+        }
+        return postRes;
+
+    }
+
 
 
     Triplocations.editLocation = async function (locationData, req, res) {
@@ -232,13 +297,25 @@ module.exports = function (Triplocations) {
         'addNewLocation', {
         http: { path: '/addNewLocation', verb: 'post' },
         accepts: [
+            { arg: 'locationData', type: 'object', http: { source: 'req' } },
+            { arg: 'req', type: 'object', http: { source: 'req' } },
+            { arg: 'res', type: 'object', http: { source: 'res' } }
+        ],
+        description: "Add a new instance of triplocation with images",
+        returns: { type: String, root: true }
+    });
+    Triplocations.remoteMethod(
+        'addNewLocation_obj', {
+        http: { path: '/addNewLocation_obj', verb: 'post' },
+        accepts: [
             { arg: 'locationData', type: 'object', http: { source: 'body' } },
             { arg: 'req', type: 'object', http: { source: 'req' } },
             { arg: 'res', type: 'object', http: { source: 'res' } }
         ],
-        description: "Add a new instance of triplocation",
+        description: "Add a new instance of triplocation without images",
         returns: { type: String, root: true }
     });
+
 
     Triplocations.remoteMethod(
         'deleteLocation', {

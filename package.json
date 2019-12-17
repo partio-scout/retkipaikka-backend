@@ -11,9 +11,11 @@
     "posttest": "npm run lint && npm audit"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "dotenv": "^8.2.0",
+    "form-data": "^3.0.0",
     "helmet": "^3.10.0",
     "loopback": "^3.22.0",
     "loopback-boot": "^2.6.5",
@@ -23,6 +25,7 @@
     "loopback-ds-timestamp-mixin": "^3.4.1",
     "loopback-softdelete-mixin4": "^1.0.8",
     "minimatch": "^3.0.4",
+    "multiparty": "^4.2.1",
     "nodemon": "^1.19.4",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^3.0.0",

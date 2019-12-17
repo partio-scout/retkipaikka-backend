@@ -32,7 +32,12 @@
   },
   "session": {},
   "auth": {},
-  "parse": {},
+  "parse": {
+    "body-parser#raw": {
+      "limit": "100kb",
+      "type": "image/*"
+    }
+  },
   "routes": {
     "loopback#rest": {
       "paths": [
