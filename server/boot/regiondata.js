@@ -9,6 +9,7 @@ module.exports = function (app, callback) {
 
         }
     }
+    // add regions and municipality data to tables from file if they are not yet
     for (let i = 0; i < dataUpdateModels.length; ++i) {
         let model = dataUpdateModels[i];
         app.models[model].count().then(res => {

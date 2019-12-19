@@ -1,13 +1,11 @@
 'use strict'
 const uuidv4 = require('uuid/v4');
 const multiparty = require('multiparty');
-const FormData = require('form-data');
 const fs = require('fs');
 const path = require('path')
 
 
 module.exports = function (Triplocations) {
-
 
     Triplocations.fetchLocations = async function (filter, req, res) {
         let wFilter = {}
@@ -16,7 +14,7 @@ module.exports = function (Triplocations) {
             wFilter = filter.where ? filter.where : {};
         }
 
-
+        // include all relations of triplocation
         let query = {
             where: wFilter,
             include: [
@@ -49,18 +47,21 @@ module.exports = function (Triplocations) {
 
             ]
         };
-
+        // find all matching triplocations
         let locations = await Triplocations.find(query).then(async obj => {
             let objs = []
             for (let i = 0; i < obj.length; ++i) {
                 let trip = obj[i];
                 trip = JSON.parse(JSON.stringify(trip));
+                // get image names of triplocation
                 let imagesArr = await fileSystem.getFiles(trip.location_id);
                 trip.images = imagesArr.map(val => val.name);
                 trip.location_category = trip.categories.object_name;
                 trip.location_region = trip.regions.object_name;
                 trip.location_municipality = trip.location_municipality ? trip.municipalities.object_name : null;
+                // remove other values from filters array, leaving only it's name
                 trip["filters"] = trip["filters"].map(t => t.object_name)
+                // delete unneeded relationdata
                 delete trip.regions;
                 delete trip.municipalities;
                 delete trip.categories
@@ -74,23 +75,29 @@ module.exports = function (Triplocations) {
     };
 
     const getFileFromRequest = (req) => new Promise((resolve, reject) => {
-        //console.log(req);
+        //use multiparty to parse the multipart/formdata data from the request
         const form = new multiparty.Form();
         form.parse(req, (err, fields, files) => {
-            if (err) reject(err);
-            const images = files['image'] // get images from the parsed object
-            const data = fields['object'][0] //get dataobject from the parsed object
-            if (!data) reject('Error in data');
-            else resolve([data, images]);
+            if (err || !fields || !files) {
+                reject("fail");
+            } else {
+                console.log(fields, files)
+                const images = files['image'] // get images from the parsed object
+                const data = fields['object'][0] //get dataobject from the parsed object
+                if (!data) reject("fail");
+                else resolve([data, images]);
+            }
         });
     });
 
 
     const checkModelExists = async function (model, id) {
+        // check if entry exists in database
         let response = await model.exists(id);
         return response;
     }
     const handleImageCreation = async function (id, imgs, res) {
+        // add images for correct triplocation
         for (let i = 0; i < imgs.length; ++i) {
             let img = imgs[i];
             await fs.copyFileSync(img.path, path.join(__dirname, "../../images/" + id + "/" + img.originalFilename)), (err) => {
@@ -111,7 +118,6 @@ module.exports = function (Triplocations) {
         let regionBool = await checkModelExists(Regions, objData.location_region);
         let municipalityBool = typeof objData.location_municipality !== "undefined" ? await checkModelExists(Municipalities, objData.location_municipality) : true;
         if (!categoryBool || !regionBool || !municipalityBool) {
-            // res.status(422);
             return "fail"
         }
         let dataFilters = objData.filters;
@@ -119,9 +125,8 @@ module.exports = function (Triplocations) {
         if (dataFilters) {
             if (dataFilters.length > 0) {
                 for (let i = 0; i < dataFilters.length; ++i) {
-                    let value = await checkModelExists(Filters, dataFilters[i]); //await Filters.exists(dataFilters[i]);
+                    let value = await checkModelExists(Filters, dataFilters[i]);
                     if (!value) {
-                        //res.status(422);
                         return "fail"
                     }
 
@@ -130,16 +135,18 @@ module.exports = function (Triplocations) {
         }
         const uuid = uuidv4();
         delete newObject["filters"];
+        //make sure that these fields get added
         newObject["location_id"] = uuid;
         newObject["location_accepted"] = false;
+        newObject["object_type"] = "city";
+        // inserta new triplocation to database
         try {
             await Triplocations.create(newObject);
         } catch (err) {
             console.error(err);
-            //res.status(err.statusCode ? err.statusCode : 422)
             return "fail"
         }
-
+        // if user gave filters, add them for triplocation
         if (dataFilters) {
             for (let i = 0; i < dataFilters.length; ++i) {
                 let relationObject = {
@@ -149,6 +156,7 @@ module.exports = function (Triplocations) {
                 await Locationfeatures.create(relationObject)
 
             }
+            // generate image folder for triplocation
             let fileSystem = Triplocations.app.models.Images;
             await fileSystem.createContainer({ "name": uuid })
 
@@ -158,23 +166,32 @@ module.exports = function (Triplocations) {
 
     }
     Triplocations.addNewLocation = async function (locationData, req, res) {
+        // parse images and object from data
         let data = await getFileFromRequest(locationData);
+        if (data === "fail") {
+            res.status(422);
+            return data;
+        }
         let objData = JSON.parse(data[0]);
         let images = data[1];
+        // try to add a new triplocation
         let postRes = await handleLocationPost(objData);
         if (postRes === "fail") {
             res.status(422);
         } else {
+            // generate images if user inputted
             if (images) {
                 await handleImageCreation(postRes, images, res)
             }
 
         }
+
         return postRes;
 
     }
 
     Triplocations.addNewLocation_obj = async function (locationData, req, res) {
+        // try to add new triplocation (from json object )
         let postRes = await handleLocationPost(locationData);
         if (postRes === "fail") {
             res.status(422);
@@ -195,6 +212,8 @@ module.exports = function (Triplocations) {
         if (locationData.location_region && !locationData.location_municipality) {
             newObject.location_municipality = null;
         }
+        // if filters are not in query, don't modify, 
+        // otherwise replace old ones with array contents
         if (locationData.filters) {
             if (locationData.filters.length >= 0) {
                 let dataFilters = locationData.filters;
@@ -237,6 +256,7 @@ module.exports = function (Triplocations) {
         let query = {
             location_id: locationuuid
         };
+        // delete relationdata and triplocation
         try {
             await Locationfeatures.destroyAll(query).then(res => {
                 Triplocations.destroyById(locationuuid)

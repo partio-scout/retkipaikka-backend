@@ -8,6 +8,7 @@ module.exports = function (app) {
             console.error(err);
         });
     }
+    // generate admin user if it's not already created
     let handleUserCreation = async function () {
         var User = app.models.Admin;
         var Role = app.models.Role;

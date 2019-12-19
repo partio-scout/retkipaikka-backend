@@ -13,6 +13,7 @@ module.exports = function (app, callback) {
         }
     }
     console.log("Started autoupdate");
+    // on server startup, check if any modifications are made to tables
     for (let i = 0; i < modelArr.length; ++i) {
         let model = modelArr[i];
         // update all models
