@@ -39,7 +39,11 @@
     },
     "object_type": {
       "type": "string",
-      "required": true
+      "required": true,
+      "postgresql": {
+        "dataType": "character varying",
+        "dataLength": 32
+      }
     },
     "location_category": {
       "type": "number",
@@ -55,7 +59,11 @@
     },
     "location_name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "postgresql": {
+        "dataType": "character varying",
+        "dataLength": 64
+      }
     },
     "location_geo": {
       "type": "GeoPoint",
@@ -63,11 +71,19 @@
     },
     "location_description": {
       "type": "string",
-      "required": false
+      "required": false,
+      "postgresql": {
+        "dataType": "character varying",
+        "dataLength": 512
+      }
     },
     "location_pricing": {
       "type": "string",
-      "required": false
+      "required": false,
+      "postgresql": {
+        "dataType": "character varying",
+        "dataLength": 280
+      }
     },
     "location_accepted": {
       "type": "boolean",
@@ -76,19 +92,35 @@
     },
     "location_owner": {
       "type": "string",
-      "required": true
+      "required": true,
+      "postgresql": {
+        "dataType": "character varying",
+        "dataLength": 64
+      }
     },
     "location_website": {
       "type": "string",
-      "required": false
+      "required": false,
+      "postgresql": {
+        "dataType": "character varying",
+        "dataLength": 64
+      }
     },
     "location_phone": {
       "type": "string",
-      "required": false
+      "required": false,
+      "postgresql": {
+        "dataType": "character varying",
+        "dataLength": 64
+      }
     },
     "location_mail": {
       "type": "string",
-      "required": false
+      "required": false,
+      "postgresql": {
+        "dataType": "character varying",
+        "dataLength": 64
+      }
     }
   },
   "validations": [],

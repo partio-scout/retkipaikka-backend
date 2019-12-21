@@ -81,7 +81,6 @@ module.exports = function (Triplocations) {
             if (err || !fields || !files) {
                 reject("fail");
             } else {
-                console.log(fields, files)
                 const images = files['image'] // get images from the parsed object
                 const data = fields['object'][0] //get dataobject from the parsed object
                 if (!data) reject("fail");

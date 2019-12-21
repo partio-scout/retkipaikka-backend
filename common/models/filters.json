@@ -9,13 +9,21 @@
     },
     "object_type": {
       "type": "string",
-      "required": true
+      "required": true,
+      "postgresql": {
+        "dataType": "character varying",
+        "dataLength": 32
+      }
     },
     "object_name": {
       "type": "string",
       "required": true,
       "index": {
         "unique": true
+      },
+      "postgresql": {
+        "dataType": "character varying",
+        "dataLength": 64
       }
     }
   },
