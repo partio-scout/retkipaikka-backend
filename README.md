@@ -1,7 +1,7 @@
 # Partio-retkipaikka-loopback
 Partion retkipaikkasovelluksen backend
 
-git clone https://gitlab.tamk.cloud/courses/tietokannat/3005/jani.niittymaki.git
+git clone https://github.com/partio-scout/retkipaikka-backend.git
 
 
 
