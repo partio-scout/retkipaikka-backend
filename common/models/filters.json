@@ -25,6 +25,39 @@
         "dataType": "character varying",
         "dataLength": 64
       }
+    },
+    "object_name_en": {
+      "type": "string",
+      "required": false,
+      "index": {
+        "unique": true
+      },
+      "postgresql": {
+        "dataType": "character varying",
+        "dataLength": 64
+      }
+    },
+    "object_name_sv": {
+      "type": "string",
+      "required": false,
+      "index": {
+        "unique": true
+      },
+      "postgresql": {
+        "dataType": "character varying",
+        "dataLength": 64
+      }
+    },
+    "object_name_sa": {
+      "type": "string",
+      "required": false,
+      "index": {
+        "unique": true
+      },
+      "postgresql": {
+        "dataType": "character varying",
+        "dataLength": 64
+      }
     }
   },
   "validations": [],
