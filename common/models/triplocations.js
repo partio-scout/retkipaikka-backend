@@ -21,14 +21,14 @@ module.exports = function (Triplocations) {
                 {
                     relation: "filters",
                     scope: { // further filter filters
-                        fields: ['object_name', 'object_name_sv', 'object_name_sa', 'object_name_en']
+                        fields: ['filter_id']
                     }
                 },
 
                 {
                     relation: "categories",
                     scope: { // further filter categories
-                        fields: ['object_name', 'object_name_sv', 'object_name_sa', 'object_name_en']
+                        fields: ['category_id']
                     }
                 },
                 {
@@ -56,11 +56,11 @@ module.exports = function (Triplocations) {
                 // get image names of triplocation
                 let imagesArr = await fileSystem.getFiles(trip.location_id);
                 trip.images = imagesArr.map(val => val.name);
-                trip.location_category = trip.categories.object_name;
+                trip.location_category = trip.categories.category_id;
                 trip.location_region = trip.regions.object_name;
                 trip.location_municipality = trip.location_municipality ? trip.municipalities.object_name : null;
                 // remove other values from filters array, leaving only it's name
-                trip["filters"] = trip["filters"].map(t => t.object_name)
+                trip["filters"] = trip["filters"].map(t => t.filter_id)
                 // delete unneeded relationdata
                 delete trip.regions;
                 delete trip.municipalities;
