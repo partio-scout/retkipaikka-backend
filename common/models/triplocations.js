@@ -21,14 +21,14 @@ module.exports = function (Triplocations) {
                 {
                     relation: "filters",
                     scope: { // further filter filters
-                        fields: ['object_name']
+                        fields: ['object_name', 'object_name_sv', 'object_name_sa', 'object_name_en']
                     }
                 },
 
                 {
                     relation: "categories",
                     scope: { // further filter categories
-                        fields: ['object_name']
+                        fields: ['object_name', 'object_name_sv', 'object_name_sa', 'object_name_en']
                     }
                 },
                 {

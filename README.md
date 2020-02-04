@@ -27,6 +27,10 @@ Luo Postgresiin DB_DATABASE kentän arvon nimellä tietokanta
 Käynnistä komennolla,
  ```
 nodemon -r dotenv/config --exitcrash
+
+tai 
+
+npm start
 ```
 niin .env latautuu
 
