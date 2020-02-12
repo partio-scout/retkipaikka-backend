@@ -20,6 +20,8 @@ services:
            - LB_EMAIL=${LB_EMAIL}
            - DB_POSTGRES_EMAIL=${DB_POSTGRES_EMAIL}
            - DB_POSTGRES_PW=${DB_POSTGRES_PW}
+           - USE_DB=${USE_DB}
+           - SSL=${SSL}
         restart: always
         command: sh -c 'nodemon -r dotenv/config --exitcrash --watch common/ --watch server/' 
     db:

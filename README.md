@@ -18,7 +18,8 @@ LB_EMAIL=hallinta@retkipaikka.com
 LB_PASSWORD=password
 DB_POSTGRES_EMAIL=hallinta@retkipaikka.com
 DB_POSTGRES_PW=password
-USE_DB=false
+USE_DB=true
+SSL=false
 ```
 
 ## Ajaminen ilman dockeria

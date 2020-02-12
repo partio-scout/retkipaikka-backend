@@ -7,7 +7,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "nodemon -r dotenv/config --exitcrash",
+    "start": "nodemon -r dotenv/config --exitcrash --watch common/ --watch server/",
     "posttest": "npm run lint && npm audit"
   },
   "dependencies": {
