@@ -6,9 +6,33 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "admin_id": {
+      "type": "string",
+      "id": true,
+      "required": true,
+      "defaultFn": "uuid"
+    },
+    "new_user": {
+      "type": "boolean",
+      "required": false,
+      "default": true
+    },
+    "notifications": {
+      "type": "string",
+      "default": "none"
+    }
+  },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "regions": {
+      "type": "hasMany",
+      "model": "Regions",
+      "foreignKey": "admin_id",
+      "through": "Usersregions",
+      "keyThrough": "region_id"
+    }
+  },
   "acls": [
     {
       "principalType": "ROLE",
@@ -18,9 +42,15 @@
     },
     {
       "principalType": "ROLE",
-      "principalId": "admin",
+      "principalId": "superadmin",
       "permission": "ALLOW",
       "property": "create"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "superadmin",
+      "permission": "ALLOW",
+      "accessType": "READ"
     }
   ],
   "methods": {}

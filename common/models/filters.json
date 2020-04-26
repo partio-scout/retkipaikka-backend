@@ -86,7 +86,7 @@
     {
       "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "admin",
+      "principalId": "superadmin",
       "permission": "ALLOW"
     }
   ],

@@ -16,7 +16,7 @@ services:
            - DB_DATABASE=${DB_DATABASE}
            - DB_PASSWORD=${DB_PASSWORD}
            - DB_USER=${DB_USER}
-           - DB_URL=${DB_URL}
+           - DATABASE_URL=${DB_URL}
            - LB_EMAIL=${LB_EMAIL}
            - DB_POSTGRES_EMAIL=${DB_POSTGRES_EMAIL}
            - DB_POSTGRES_PW=${DB_POSTGRES_PW}

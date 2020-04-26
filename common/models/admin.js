@@ -1,0 +1,1 @@
+//notifications field possible values are "none", "all", "some"

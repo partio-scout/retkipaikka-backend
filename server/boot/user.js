@@ -16,14 +16,14 @@ module.exports = function (app) {
         let email = process.env.LB_EMAIL || "hallinta@retkipaikka.com";
         let password = process.env.LB_PASSWORD || "demo";
         let userExists = await checkIfExists(User, { where: { email: email } });
-        let roleExists = await checkIfExists(Role, { where: { name: "admin" } });
+        let roleExists = await checkIfExists(Role, { where: { name: "superadmin" } });
         if (userExists === 0) {
-            User.create({ username: 'Admin', email: email, password: password }, function (err, users) {
+            User.create({ new_user: false, username: 'Superadmin', email: email, password: password }, function (err, users) {
                 if (err) console.error(err);
-                console.log("Created Admin user")
+                console.log("Created Superadmin user")
                 if (roleExists === 0) {
                     // Create the admin role
-                    Role.create({ name: 'admin' }, function (err, role) {
+                    Role.create({ name: 'superadmin' }, function (err, role) {
                         if (err) console.error(err);
                         role.principals.create({ principalType: RoleMapping.USER, principalId: users.id }, function (err, principal) {
                             if (err) console.error(err);

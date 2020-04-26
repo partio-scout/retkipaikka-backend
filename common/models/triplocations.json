@@ -172,14 +172,14 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "admin",
+      "principalId": "superadmin",
       "permission": "ALLOW",
       "property": "addNewLocation_obj"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "admin",
+      "principalId": "superadmin",
       "permission": "ALLOW",
       "property": "deleteLocation"
     },
@@ -187,6 +187,13 @@
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "editLocation"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superadmin",
       "permission": "ALLOW",
       "property": "editLocation"
     }
