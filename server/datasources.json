@@ -1,15 +1,5 @@
 {
-  "db": {
-    "host": "db",
-    "port": 5432,
-    "url": "postgres://postgres:tuni@localhost:5432/retkipaikka_beta?ssl=false",
-    "database": "retkipaikka_beta",
-    "password": "tuni",
-    "name": "db",
-    "connector": "postgresql",
-    "user": "postgres",
-    "ssl": false
-  },
+  "db": {},
   "storage": {
     "name": "storage",
     "connector": "loopback-component-storage",

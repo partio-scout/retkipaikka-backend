@@ -8,3 +8,5 @@ COPY common/ ./common
 COPY server/ ./server
 COPY images/ ./images
 RUN npm install
+EXPOSE 3000:3000
+CMD ["npm","start"]

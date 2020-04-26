@@ -20,6 +20,8 @@ LB_EMAIL=hallinta@retkipaikka.com
 LB_PASSWORD=password
 DB_POSTGRES_EMAIL=hallinta@retkipaikka.com
 DB_POSTGRES_PW=password
+USE_DB=true
+SSL=false
 ```
 
 ## Ajaminen ilman dockeria
@@ -29,6 +31,10 @@ Luo Postgresiin DB_DATABASE kentän arvon nimellä tietokanta
 Käynnistä komennolla,
  ```
 nodemon -r dotenv/config --exitcrash
+
+tai 
+
+npm start
 ```
 niin .env latautuu
 

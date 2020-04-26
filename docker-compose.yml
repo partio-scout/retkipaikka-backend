@@ -20,6 +20,8 @@ services:
            - LB_EMAIL=${LB_EMAIL}
            - DB_POSTGRES_EMAIL=${DB_POSTGRES_EMAIL}
            - DB_POSTGRES_PW=${DB_POSTGRES_PW}
+           - USE_DB=${USE_DB}
+           - SSL=${SSL}
         restart: always
         command: sh -c 'nodemon -r dotenv/config --exitcrash --watch common/ --watch server/' 
     db:
@@ -33,15 +35,6 @@ services:
           - "54320:5432"
         volumes:
           - ../postgres-data:/var/lib/postgresql/data
-    pgadmin4:
-        image: dpage/pgadmin4
-        environment:
-          PGADMIN_DEFAULT_EMAIL: ${DB_POSTGRES_EMAIL}
-          PGADMIN_DEFAULT_PASSWORD: ${DB_POSTGRES_PW}
-        volumes:
-          - ../postgres-data:/var/lib/postgresql/data
-        ports:
-          - "80:80"
     
 
 
