@@ -27,6 +27,13 @@
       "type": "belongsTo",
       "model": "Regions",
       "foreignKey": "region_id"
+    },
+    "admins": {
+      "type": "hasMany",
+      "model": "Admin",
+      "foreignKey": "municipality_id",
+      "through": "UsersRegions",
+      "keyThrough": "admin_id"
     }
   },
   "acls": [

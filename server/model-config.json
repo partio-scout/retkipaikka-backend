@@ -65,7 +65,10 @@
     "dataSource": "db",
     "public": true
   },
-  "Usersregions": {
+  "UsersRegions": {
     "dataSource": "db"
+  },
+  "Email": {
+    "dataSource": "email"
   }
 }

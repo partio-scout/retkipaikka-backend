@@ -1,5 +1,5 @@
 {
-    "name": "Usersregions",
+    "name": "UsersRegions",
     "base": "PersistedModel",
     "foreignKeys": {
         "admin_id": {
@@ -8,11 +8,11 @@
             "entityKey": "admin_id",
             "entity": "Admin"
         },
-        "region_id": {
-            "name": "region_id",
-            "foreignKey": "region_id",
-            "entityKey": "region_id",
-            "entity": "Regions"
+        "municipality_id": {
+            "name": "municipality_id",
+            "foreignKey": "municipality_id",
+            "entityKey": "municipality_id",
+            "entity": "Municipalities"
         }
     },
     "properties": {},
@@ -25,8 +25,8 @@
         },
         "regions": {
             "type": "belongsTo",
-            "model": "Regions",
-            "foreignKey": "region_id"
+            "model": "Municipalities",
+            "foreignKey": "municipality_id"
         }
     },
     "acls": [

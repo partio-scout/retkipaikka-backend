@@ -17,6 +17,7 @@ module.exports = function (app) {
         let password = process.env.LB_PASSWORD || "demo";
         let userExists = await checkIfExists(User, { where: { email: email } });
         let roleExists = await checkIfExists(Role, { where: { name: "superadmin" } });
+        let adminRoleExists = await checkIfExists(Role, { where: { name: "admin" } });
         if (userExists === 0) {
             User.create({ new_user: false, username: 'Superadmin', email: email, password: password }, function (err, users) {
                 if (err) console.error(err);
@@ -32,8 +33,14 @@ module.exports = function (app) {
                 }
             });
         }
+        if (adminRoleExists === 0) {
+            Role.create({ name: 'admin' }, function (err, role) {
+                if (err) console.error(err)
+            })
+
+        }
+
 
     }
-
     handleUserCreation()
-};
+}

@@ -5,5 +5,23 @@
     "connector": "loopback-component-storage",
     "provider": "filesystem",
     "root": "./images"
+  },
+  "email": {
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp.private.com",
+        "secure": false,
+        "port": 587,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "me@private.com",
+          "pass": "password"
+        }
+      }
+    ]
   }
 }

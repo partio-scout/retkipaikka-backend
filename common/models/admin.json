@@ -29,8 +29,14 @@
       "type": "hasMany",
       "model": "Regions",
       "foreignKey": "admin_id",
-      "through": "Usersregions",
-      "keyThrough": "region_id"
+      "through": "UsersRegions",
+      "keyThrough": "municipality_id"
+    },
+    "roles": {
+      "type": "hasMany",
+      "model": "Role",
+      "foreignKey": "principalId",
+      "through": "RoleMapping"
     }
   },
   "acls": [
