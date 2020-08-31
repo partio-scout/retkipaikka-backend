@@ -109,19 +109,20 @@ module.exports = function (Admin) {
 
         let html = `<div><h5>${title}</h5><br /> ${text}</div>`
         for (const email of emails) {
-            Admin.app.models.Email.send({
-                to: email,
-                from: from,
-                subject: subject,
-                html: html
-            }, function (err) {
-                if (err) {
-                    console.log(err);
-                    console.log('> error sending an email');
-                    return
-                }
-                console.log('> email sent to:', email);
-            });
+            console.log(html);
+            // Admin.app.models.Email.send({
+            //     to: email,
+            //     from: from,
+            //     subject: subject,
+            //     html: html
+            // }, function (err) {
+            //     if (err) {
+            //         console.log(err);
+            //         console.log('> error sending an email');
+            //         return
+            //     }
+            //     console.log('> email sent to:', email);
+            // });
         }
 
         return;
@@ -156,8 +157,22 @@ module.exports = function (Admin) {
 
 
     }
-
-
+    Admin.checkAccessToken = async function (token, req, res) {
+        let AccessTokens = Admin.app.models.AccessToken;
+        let response = await AccessTokens.exists(token)
+        return response;
+    }
+    Admin.remoteMethod(
+        'checkAccessToken', {
+        http: { path: '/checkAccessToken/:token', verb: 'get' },
+        accepts: [
+            { arg: 'token', type: 'string', http: { source: 'path' } },
+            { arg: 'req', type: 'object', http: { source: 'req' } },
+            { arg: 'res', type: 'object', http: { source: 'res' } }
+        ],
+        description: "Check token",
+        returns: { type: String, root: true }
+    });
     Admin.remoteMethod(
         'createUser', {
         http: { path: '/createUser', verb: 'post' },

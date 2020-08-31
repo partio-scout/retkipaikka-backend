@@ -57,6 +57,13 @@
       "principalId": "superadmin",
       "permission": "ALLOW",
       "accessType": "READ"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "checkAccessToken"
     }
   ],
   "methods": {}
