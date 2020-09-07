@@ -64,6 +64,13 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "checkAccessToken"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "createUser"
     }
   ],
   "methods": {}

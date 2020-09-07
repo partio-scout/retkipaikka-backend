@@ -133,6 +133,7 @@ module.exports = function (Admin) {
     const handleEmailSend = async function () {
         let emails = []
         let admins = await Admin.fetchUsers({})
+        admins = JSON.parse(JSON.stringify(admins))
         admins = admins.filter(a => a.roles.find(r => r.name === "superadmin"))
         admins.forEach(a => {
             if (a.email) {
@@ -147,12 +148,13 @@ module.exports = function (Admin) {
     }
 
     Admin.createUser = async function (object, req, res) {
-
-        await Admin.create(object).then(async res => {
+        let tempObj = JSON.parse(JSON.stringify(object))
+        tempObj.new_user = true;
+        return await Admin.create(tempObj).then(async res => {
             await handleEmailSend()
+            return;
         }).catch(err => {
             return err
-
         })
 
 
@@ -177,7 +179,7 @@ module.exports = function (Admin) {
         'createUser', {
         http: { path: '/createUser', verb: 'post' },
         accepts: [
-            { arg: 'locationData', type: 'object', http: { source: 'req' } },
+            { arg: 'userData', type: 'object', http: { source: 'body' } },
             { arg: 'req', type: 'object', http: { source: 'req' } },
             { arg: 'res', type: 'object', http: { source: 'res' } }
         ],
