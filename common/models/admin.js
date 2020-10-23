@@ -66,6 +66,23 @@ module.exports = function (Admin) {
         res.status(422);
         return "error"
     }
+
+    Admin.on('dataSourceAttached', () => {
+        const { login } = Admin;
+        Admin.login = async (credentials, include) => {
+            const accessToken = await login.call(Admin, credentials, include);
+            const admin = await Admin.findById(accessToken.userId);
+            if (admin.new_user || !admin) {
+                Admin.logout(accessToken.id);
+                const err = new Error('User is not activated');
+                err.code = 'NOT_ACTIVE_USER';
+                err.statusCode = 403;
+                throw err
+            }
+            return accessToken;
+        };
+    });
+
     //notifications field possible values are "none", "all", "some"
     Admin.modifyUserSettings = async function (object, req, res) {
         if (object.user) {
@@ -154,6 +171,7 @@ module.exports = function (Admin) {
             await handleEmailSend()
             return;
         }).catch(err => {
+            console.log(err);
             return err
         })
 
@@ -175,6 +193,7 @@ module.exports = function (Admin) {
         description: "Check token",
         returns: { type: String, root: true }
     });
+
     Admin.remoteMethod(
         'createUser', {
         http: { path: '/createUser', verb: 'post' },
@@ -186,6 +205,7 @@ module.exports = function (Admin) {
         description: "Add a new user",
         returns: { type: String, root: true }
     });
+
     Admin.remoteMethod(
         'editUser', {
         http: { path: '/editUser', verb: 'patch' },
