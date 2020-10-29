@@ -83,43 +83,52 @@ module.exports = function (Admin) {
         };
     });
 
-    //notifications field possible values are "none", "all", "some"
-    Admin.modifyUserSettings = async function (object, req, res) {
+    //notifications field possible values are "none", "all", "select"
+    Admin.modifyUserNotifications = async function (object, req, res) {
         if (object.user) {
             const user = object.user;
-            const municipalities = object.municipalities;
+            const regions = object.regions;
             const adminId = user.admin_id;
-            let UsersRegions = Triplocations.app.models.UsersRegions;
-            const newObject = JSON.parse(JSON.stringify(user))
-            await Admin.updateAll({ admin_id: adminId }, newObject).then(async res => {
-                if (regions) {
-                    if (regions.length >= 0) {
-                        try {
+            let UsersRegions = Admin.app.models.UsersRegions;
+            let fountAdmin = await Admin.findById(adminId);
+            console.log(object)
+            if (fountAdmin) {
+                await fountAdmin.updateAttribute("notifications", user.notifications).then(async res => {
+                    if (regions) {
+                        if (regions.length >= 0) {
+                            console.log(regions, "IN HERE")
                             await UsersRegions.destroyAll({ admin_id: adminId }).then(async res => {
-                                for (let i = 0; i < municipalities.length; ++i) {
+                                for (let i = 0; i < regions.length; ++i) {
                                     let relationObject = {
                                         admin_id: adminId,
-                                        municipality_id: municipalities[i]
+                                        region_id: regions[i]
                                     }
                                     await UsersRegions.create(relationObject);
                                 }
+                            }).catch(err => {
+                                res.status(err.statusCode ? err.statusCode : 422)
+                                return err
                             })
-                        } catch (err) {
-                            res.status(err.statusCode ? err.statusCode : 422)
-                            return err
                         }
                     }
-                }
-            }).catch(err => {
+                }).catch(err => {
+                    console.error(err);
+                })
 
-            })
-
-            return "success"
+                return "success"
+            }
         }
         res.status(422)
         return "fail"
     }
-
+    Admin.fetchUserData = async function (adminId, req, res) {
+        console.log(adminId)
+        let filter = {
+            where: { admin_id: adminId },
+            include: [{ relation: "regions" }, { relation: "roles" }]
+        }
+        return await Admin.findOne(filter);
+    }
 
 
     const sendEmail = async function (emails, title, text, subject, from) {
@@ -220,17 +229,27 @@ module.exports = function (Admin) {
 
 
     Admin.remoteMethod(
-        'modifyUserSettings', {
-        http: { path: '/modifyUserSettings', verb: 'patch' },
+        'modifyUserNotifications', {
+        http: { path: '/modifyUserNotifications', verb: 'patch' },
         accepts: [
             { arg: 'user', type: 'object', http: { source: 'body' } },
             { arg: 'req', type: 'object', http: { source: 'req' } },
             { arg: 'res', type: 'object', http: { source: 'res' } }
         ],
-        description: "Add a new user",
+        description: "Modifies notification settings of single user",
         returns: { type: String, root: true }
     });
-
+    Admin.remoteMethod(
+        'fetchUserData', {
+        http: { path: '/fetchUserData/:adminId', verb: 'get' },
+        accepts: [
+            { arg: 'adminId', type: 'string', http: { source: 'path' } },
+            { arg: 'req', type: 'object', http: { source: 'req' } },
+            { arg: 'res', type: 'object', http: { source: 'res' } }
+        ],
+        description: "Fetch single user",
+        returns: { type: Admin, root: true }
+    });
 
     Admin.remoteMethod(
         'fetchUsers', {

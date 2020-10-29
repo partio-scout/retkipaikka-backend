@@ -23,6 +23,13 @@
       "type": "hasMany",
       "model": "Triplocations",
       "foreignKey": "location_region"
+    },
+    "admins": {
+      "type": "hasMany",
+      "model": "Admin",
+      "foreignKey": "region_id",
+      "through": "UsersRegions",
+      "keyThrough": "admin_id"
     }
   },
   "acls": [

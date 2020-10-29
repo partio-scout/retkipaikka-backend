@@ -8,11 +8,11 @@
             "entityKey": "admin_id",
             "entity": "Admin"
         },
-        "municipality_id": {
-            "name": "municipality_id",
-            "foreignKey": "municipality_id",
-            "entityKey": "municipality_id",
-            "entity": "Municipalities"
+        "region_id": {
+            "name": "region_id",
+            "foreignKey": "region_id",
+            "entityKey": "region_id",
+            "entity": "Regions"
         }
     },
     "properties": {},
@@ -25,8 +25,8 @@
         },
         "regions": {
             "type": "belongsTo",
-            "model": "Municipalities",
-            "foreignKey": "municipality_id"
+            "model": "Regions",
+            "foreignKey": "region_id"
         }
     },
     "acls": [

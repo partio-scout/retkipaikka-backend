@@ -30,7 +30,7 @@
       "model": "Regions",
       "foreignKey": "admin_id",
       "through": "UsersRegions",
-      "keyThrough": "municipality_id"
+      "keyThrough": "region_id"
     },
     "roles": {
       "type": "hasMany",
@@ -64,6 +64,34 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "checkAccessToken"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "modifyUserNotifications"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superadmin",
+      "permission": "ALLOW",
+      "property": "modifyUserNotifications"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "fetchUserData"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superadmin",
+      "permission": "ALLOW",
+      "property": "fetchUserData"
     },
     {
       "accessType": "EXECUTE",
