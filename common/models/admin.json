@@ -21,6 +21,14 @@
     "notifications": {
       "type": "string",
       "default": "none"
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "postgresql": {
+        "dataType": "character varying",
+        "dataLength": 280
+      }
     }
   },
   "validations": [],

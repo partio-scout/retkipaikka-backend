@@ -91,12 +91,10 @@ module.exports = function (Admin) {
             const adminId = user.admin_id;
             let UsersRegions = Admin.app.models.UsersRegions;
             let fountAdmin = await Admin.findById(adminId);
-            console.log(object)
             if (fountAdmin) {
                 await fountAdmin.updateAttribute("notifications", user.notifications).then(async res => {
                     if (regions) {
                         if (regions.length >= 0) {
-                            console.log(regions, "IN HERE")
                             await UsersRegions.destroyAll({ admin_id: adminId }).then(async res => {
                                 for (let i = 0; i < regions.length; ++i) {
                                     let relationObject = {
@@ -122,7 +120,6 @@ module.exports = function (Admin) {
         return "fail"
     }
     Admin.fetchUserData = async function (adminId, req, res) {
-        console.log(adminId)
         let filter = {
             where: { admin_id: adminId },
             include: [{ relation: "regions" }, { relation: "roles" }]
@@ -259,7 +256,7 @@ module.exports = function (Admin) {
             { arg: 'req', type: 'object', http: { source: 'req' } },
             { arg: 'res', type: 'object', http: { source: 'res' } }
         ],
-        description: "return admin users with their roles",
+        description: "Return admin users with their roles",
         returns: { type: Admin, root: true }
     }
     );
@@ -271,8 +268,8 @@ module.exports = function (Admin) {
             { arg: 'req', type: 'object', http: { source: 'req' } },
             { arg: 'res', type: 'object', http: { source: 'res' } }
         ],
-        description: "return admin users with their roles",
-        returns: { type: Admin, root: true }
+        description: "Return all current roles",
+        returns: { type: Object, root: true }
     }
     );
 }
