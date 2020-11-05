@@ -90,6 +90,13 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
+      "principalId": "superadmin",
+      "permission": "ALLOW",
+      "property": "editUser"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
       "principalId": "admin",
       "permission": "ALLOW",
       "property": "fetchUserData"

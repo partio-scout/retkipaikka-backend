@@ -39,7 +39,8 @@ module.exports = function (Admin) {
     }
 
     Admin.editUser = async function (object, req, res) {
-        if (object.roles && object.user) {
+        const { roles, user } = object;
+        if (roles && user) {
             let RoleMapping = Triplocations.app.models.RoleMapping;
             let roles = object.roles;
             let adminId = object.user.admin_id;
@@ -62,6 +63,11 @@ module.exports = function (Admin) {
                     }
                 }
             }
+            let fountAdmin = await Admin.findById(accessToken.userId);
+            if (admin) {
+                await fountAdmin.updateAttributes(user)
+            }
+
         }
         res.status(422);
         return "error"
@@ -220,7 +226,7 @@ module.exports = function (Admin) {
             { arg: 'req', type: 'object', http: { source: 'req' } },
             { arg: 'res', type: 'object', http: { source: 'res' } }
         ],
-        description: "Add a new user",
+        description: "Edit user's roles and activation status",
         returns: { type: String, root: true }
     });
 
