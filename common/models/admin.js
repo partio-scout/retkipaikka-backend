@@ -40,10 +40,10 @@ module.exports = function (Admin) {
 
     Admin.editUser = async function (object, req, res) {
         const { roles, user } = object;
+
         if (roles && user) {
-            let RoleMapping = Triplocations.app.models.RoleMapping;
-            let roles = object.roles;
-            let adminId = object.user.admin_id;
+            let RoleMapping = Admin.app.models.RoleMapping;
+            let adminId = user.admin_id;
             if (roles) {
                 if (roles.length >= 0) {
                     try {
@@ -58,15 +58,16 @@ module.exports = function (Admin) {
                             }
                         })
                     } catch (err) {
-                        res.status(err.statusCode ? err.statusCode : 422)
+                        res.status(err.statusCode ? err.statusCode : 500)
                         return err
                     }
                 }
             }
-            let fountAdmin = await Admin.findById(accessToken.userId);
-            if (admin) {
+            let fountAdmin = await Admin.findById(adminId);
+            if (fountAdmin) {
                 await fountAdmin.updateAttributes(user)
             }
+            return "success"
 
         }
         res.status(422);
@@ -77,7 +78,7 @@ module.exports = function (Admin) {
         const { login } = Admin;
         Admin.login = async (credentials, include) => {
             const accessToken = await login.call(Admin, credentials, include);
-            const admin = await Admin.findById(accessToken.userId);
+            let admin = await Admin.findById(accessToken.userId);
             if (admin.new_user || !admin) {
                 Admin.logout(accessToken.id);
                 const err = new Error('User is not activated');
@@ -125,6 +126,8 @@ module.exports = function (Admin) {
         res.status(422)
         return "fail"
     }
+
+
     Admin.fetchUserData = async function (adminId, req, res) {
         let filter = {
             where: { admin_id: adminId },
@@ -187,8 +190,8 @@ module.exports = function (Admin) {
             return err
         })
 
-
     }
+
     Admin.checkAccessToken = async function (token, req, res) {
         let AccessTokens = Admin.app.models.AccessToken;
         let response = await AccessTokens.exists(token)
