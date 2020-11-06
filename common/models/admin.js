@@ -63,10 +63,13 @@ module.exports = function (Admin) {
                     }
                 }
             }
-            let fountAdmin = await Admin.findById(adminId);
-            if (fountAdmin) {
-                await fountAdmin.updateAttributes(user)
+            if (Object.keys(user).length > 1) {
+                let fountAdmin = await Admin.findById(adminId);
+                if (fountAdmin) {
+                    await fountAdmin.updateAttributes(user)
+                }
             }
+
             return "success"
 
         }

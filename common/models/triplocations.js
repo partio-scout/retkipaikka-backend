@@ -155,11 +155,11 @@ module.exports = function (Triplocations) {
                 await Locationfeatures.create(relationObject)
 
             }
-            // generate image folder for triplocation
-            let fileSystem = Triplocations.app.models.Images;
-            await fileSystem.createContainer({ "name": uuid })
-
         }
+
+        // generate image folder for triplocation
+        let fileSystem = Triplocations.app.models.Images;
+        await fileSystem.createContainer({ "name": uuid })
         console.log("1 location succesfully added")
         return uuid
 
