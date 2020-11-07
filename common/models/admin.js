@@ -64,19 +64,27 @@ module.exports = function (Admin) {
                 }
             }
             if (Object.keys(user).length > 1) {
-                let fountAdmin = await Admin.findById(adminId);
-                if (fountAdmin) {
-                    await fountAdmin.updateAttributes(user)
-                }
+                await Admin.updateSettings(user)
             }
-
             return "success"
 
         }
         res.status(422);
         return "error"
     }
-
+    Admin.updateSettings = async function (object, req, res) {
+        const { admin_id } = object;
+        if (object.password) delete object.password;
+        let fountAdmin = await Admin.findById(admin_id);
+        if (fountAdmin) {
+            await fountAdmin.updateAttributes(object)
+            return true;
+        }
+        if (res) {
+            res.status(422);
+        }
+        return false;
+    }
     Admin.on('dataSourceAttached', () => {
         const { login } = Admin;
         Admin.login = async (credentials, include) => {
@@ -233,6 +241,17 @@ module.exports = function (Admin) {
             { arg: 'res', type: 'object', http: { source: 'res' } }
         ],
         description: "Edit user's roles and activation status",
+        returns: { type: String, root: true }
+    });
+    Admin.remoteMethod(
+        'updateSettings', {
+        http: { path: '/updateSettings', verb: 'patch' },
+        accepts: [
+            { arg: 'user', type: 'object', http: { source: 'body' } },
+            { arg: 'req', type: 'object', http: { source: 'req' } },
+            { arg: 'res', type: 'object', http: { source: 'res' } }
+        ],
+        description: "Edit user's properties ",
         returns: { type: String, root: true }
     });
 
