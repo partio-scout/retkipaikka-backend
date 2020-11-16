@@ -121,6 +121,10 @@
         "dataType": "character varying",
         "dataLength": 64
       }
+    },
+    "location_editor": {
+      "type": "string",
+      "required": false
     }
   },
   "validations": [],

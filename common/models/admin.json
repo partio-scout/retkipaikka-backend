@@ -2,6 +2,12 @@
   "name": "Admin",
   "plural": "Users",
   "base": "User",
+  "scope": {
+    "include": [
+      "roles",
+      "regions"
+    ]
+  },
   "idInjection": true,
   "options": {
     "validateUpsert": true
@@ -19,6 +25,10 @@
       "default": true
     },
     "notifications": {
+      "type": "string",
+      "default": "none"
+    },
+    "user_notifications": {
       "type": "string",
       "default": "none"
     },

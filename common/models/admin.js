@@ -97,6 +97,12 @@ module.exports = function (Admin) {
                 err.statusCode = 403;
                 throw err
             }
+            //let data = await Admin.fetchUserData(accessToken.userId);
+
+
+            //console.log(accessToken())
+
+            //console.log(data.regions())
             return accessToken;
         };
     });
