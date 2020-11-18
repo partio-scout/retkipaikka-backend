@@ -16,16 +16,101 @@
       "id": true,
       "generated": true
     },
-    "notification_title": {
+    "title": {
       "type": "string",
       "required": true
     },
-    "notification_description": {
+    "title_en": {
       "type": "string",
-      "required": true,
-      "index": {
-        "unique": true
-      }
+      "required": false
+    },
+    "title_sv": {
+      "type": "string",
+      "required": false
+    },
+    "title_sa": {
+      "type": "string",
+      "required": false
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "description_en": {
+      "type": "string",
+      "required": true
+    },
+    "description_sv": {
+      "type": "string",
+      "required": true
+    },
+    "description_sa": {
+      "type": "string",
+      "required": true
+    },
+    "bottom_title": {
+      "type": "string",
+      "required": false
+    },
+    "bottom_title_en": {
+      "type": "string",
+      "required": false
+    },
+    "bottom_title_sv": {
+      "type": "string",
+      "required": false
+    },
+    "bottom_title_sa": {
+      "type": "string",
+      "required": false
+    },
+    "top_title": {
+      "type": "string",
+      "required": false
+    },
+    "top_title_en": {
+      "type": "string",
+      "required": false
+    },
+    "top_title_sv": {
+      "type": "string",
+      "required": false
+    },
+    "top_title_sa": {
+      "type": "string",
+      "required": false
+    },
+    "link_text": {
+      "type": "string",
+      "required": true
+    },
+    "link_text_en": {
+      "type": "string",
+      "required": true
+    },
+    "link_text_sa": {
+      "type": "string",
+      "required": true
+    },
+    "link_text_sv": {
+      "type": "string",
+      "required": true
+    },
+    "link_url": {
+      "type": "string",
+      "required": true
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "display_frontpage": {
+      "type": "boolean",
+      "default": false
+    },
+    "display_expiration": {
+      "type": "DateString",
+      "default": null
     }
   },
   "validations": [],
@@ -36,6 +121,24 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "superadmin",
+      "permission": "ALLOW"
     }
   ],
   "methods": {}
