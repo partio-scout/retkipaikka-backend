@@ -82,7 +82,7 @@
     },
     "link_text": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "link_text_en": {
       "type": "string",
