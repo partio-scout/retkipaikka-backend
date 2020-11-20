@@ -32,21 +32,21 @@
       "type": "string",
       "required": false
     },
-    "description": {
+    "text": {
       "type": "string",
       "required": true
     },
-    "description_en": {
+    "text_en": {
       "type": "string",
-      "required": true
+      "required": false
     },
-    "description_sv": {
+    "text_sv": {
       "type": "string",
-      "required": true
+      "required": false
     },
-    "description_sa": {
+    "text_sa": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "bottom_title": {
       "type": "string",
@@ -86,19 +86,19 @@
     },
     "link_text_en": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "link_text_sa": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "link_text_sv": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "link_url": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "enabled": {
       "type": "boolean",
