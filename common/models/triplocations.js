@@ -21,14 +21,8 @@ module.exports = function (Triplocations) {
                 {
                     relation: "filters",
                     scope: { // further filter filters
-                        fields: ['filter_id']
-                    }
-                },
+                        fields: ["filter_id"],
 
-                {
-                    relation: "categories",
-                    scope: { // further filter categories
-                        fields: ['category_id']
                     }
                 },
                 {
@@ -47,16 +41,15 @@ module.exports = function (Triplocations) {
 
             ]
         };
+
         // find all matching triplocations
+        console.time("fetch")
         let locations = await Triplocations.find(query).then(async obj => {
-            let objs = []
-            for (let i = 0; i < obj.length; ++i) {
-                let trip = obj[i];
+            return Promise.all(obj.map(async trip => {
                 trip = JSON.parse(JSON.stringify(trip));
                 // get image names of triplocation
                 let imagesArr = await fileSystem.getFiles(trip.location_id);
                 trip.images = imagesArr.map(val => val.name);
-                trip.location_category = trip.categories.category_id;
                 trip.location_region = trip.regions.object_name;
                 trip.location_municipality = trip.location_municipality ? trip.municipalities.object_name : null;
                 // remove other values from filters array, leaving only it's name
@@ -64,12 +57,11 @@ module.exports = function (Triplocations) {
                 // delete unneeded relationdata
                 delete trip.regions;
                 delete trip.municipalities;
-                delete trip.categories
-                objs.push(trip);
-            }
-            return objs;
-        });
+                return trip;
+            }))
 
+        });
+        console.timeEnd("fetch")
         console.log("returned " + locations.length + " locations");
         return locations;
     };
@@ -88,7 +80,81 @@ module.exports = function (Triplocations) {
             }
         });
     });
+    const generateMainFilter = (locationIds, data) => {
+        if (locationIds.length === 0) {
+            return null;
+        }
+        let mainFilter = {
+            where: {
+                and: [
+                    { location_accepted: true },
+                    { location_id: { inq: locationIds } }
+                ]
+            }
+        }
 
+        let orExists = false;
+        if (data.municipalities.length > 0) {
+            mainFilter.where.and.push({ or: [{ location_municipality: { inq: data.municipalities } }] });
+            orExists = true;
+        }
+        if (data.regions.length > 0) {
+            if (orExists) {
+                mainFilter.where.and[2].or.push({ location_region: { inq: data.regions } });
+            } else {
+                mainFilter.where.and.push({ or: [{ location_region: { inq: data.regions } }] });
+            }
+        }
+        if (data.categories.length > 0) {
+            mainFilter.where.and.push({ location_category: { inq: data.categories } })
+        }
+        return mainFilter;
+    }
+
+
+    Triplocations.handleFiltering = async function (data, req, res) {
+        if (!data.filters || !data.categories || !data.municipalities || !data.regions) {
+            return []
+        }
+        if (data.filters.length == 0 && data.categories.length == 0 && data.municipalities.length == 0 && data.regions.length == 0) {
+            return Triplocations.fetchLocations();
+        }
+        let Locationfeatures = Triplocations.app.models.Locationfeatures;
+        let filterQuery = {
+            where: {}
+        }
+
+        if (data.filters.length > 0) {
+            filterQuery.where = { filter_id: { inq: data.filters } }
+        }
+
+        return await Locationfeatures.find(filterQuery).then(async res => {
+            let tempIdObj = {};
+            res.forEach(loc => {
+                let id = loc.location_id;
+                if (tempIdObj[id]) {
+                    tempIdObj[id].push(loc.filter_id)
+                } else {
+                    tempIdObj[id] = [loc.filter_id]
+                }
+            })
+            let dataFilterLen = data.filters.length;
+            let locationIds = []
+            Object.keys(tempIdObj).forEach(locId => {
+                if (tempIdObj[locId].length == dataFilterLen || dataFilterLen == 0) {
+                    locationIds.push(locId);
+                }
+            })
+            let mainFilter = generateMainFilter(locationIds, data)
+            if (!mainFilter) {
+                return [];
+            }
+
+            return await Triplocations.fetchLocations(mainFilter)
+
+        })
+
+    }
 
     const checkModelExists = async function (model, id) {
         // check if entry exists in database
@@ -285,6 +351,19 @@ module.exports = function (Triplocations) {
             { arg: 'res', type: 'object', http: { source: 'res' } }
         ],
         description: "returns all locations with all data",
+        returns: { type: Triplocations, root: true }
+    }
+    );
+
+    Triplocations.remoteMethod(
+        'handleFiltering', {
+        http: { path: '/handleFiltering', verb: 'get' },
+        accepts: [
+            { arg: 'data', type: 'object', http: { source: 'query' } },
+            { arg: 'req', type: 'object', http: { source: 'req' } },
+            { arg: 'res', type: 'object', http: { source: 'res' } }
+        ],
+        description: "Handle ui filtering",
         returns: { type: Triplocations, root: true }
     }
     );

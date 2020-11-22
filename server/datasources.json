@@ -1,5 +1,7 @@
 {
-  "db": {},
+  "db": {
+    "name": "db"
+  },
   "storage": {
     "name": "storage",
     "connector": "loopback-component-storage",
@@ -7,6 +9,7 @@
     "root": "./images"
   },
   "email": {
+    "name": "email",
     "connector": "mail",
     "transports": [
       {
