@@ -9,14 +9,18 @@ module.exports = function (Triplocations) {
 
     Triplocations.fetchLocations = async function (filter, req, res) {
         let wFilter = {}
+        let fields = []
         var fileSystem = Triplocations.app.models.Images;
+
         if (filter) {
             wFilter = filter.where ? filter.where : {};
+            fields = filter.limitedFields ? ["location_id", "location_geo", "location_name", "location_category"] : []
         }
 
         // include all relations of triplocation
         let query = {
             where: wFilter,
+            fields: fields,
             include: [
                 {
                     relation: "filters",
@@ -43,25 +47,29 @@ module.exports = function (Triplocations) {
         };
 
         // find all matching triplocations
-        console.time("fetch")
+
         let locations = await Triplocations.find(query).then(async obj => {
             return Promise.all(obj.map(async trip => {
-                trip = JSON.parse(JSON.stringify(trip));
-                // get image names of triplocation
-                let imagesArr = await fileSystem.getFiles(trip.location_id);
-                trip.images = imagesArr.map(val => val.name);
-                trip.location_region = trip.regions.object_name;
-                trip.location_municipality = trip.location_municipality ? trip.municipalities.object_name : null;
-                // remove other values from filters array, leaving only it's name
-                trip["filters"] = trip["filters"].map(t => t.filter_id)
-                // delete unneeded relationdata
-                delete trip.regions;
-                delete trip.municipalities;
+                if (!filter.limitedFields) {
+                    trip = JSON.parse(JSON.stringify(trip));
+                    // get image names of triplocation
+                    let imagesArr = await fileSystem.getFiles(trip.location_id);
+                    trip.images = imagesArr.map(val => val.name);
+                    trip.location_region = trip.regions.object_name;
+                    trip.location_municipality = trip.location_municipality ? trip.municipalities.object_name : null;
+                    // remove other values from filters array, leaving only it's name
+                    trip["filters"] = trip["filters"].map(t => t.filter_id)
+                    // delete unneeded relationdata
+                    delete trip.regions;
+                    delete trip.municipalities;
+
+                }
+
                 return trip;
             }))
 
         });
-        console.timeEnd("fetch")
+
         console.log("returned " + locations.length + " locations");
         return locations;
     };
@@ -117,7 +125,7 @@ module.exports = function (Triplocations) {
             return []
         }
         if (data.filters.length == 0 && data.categories.length == 0 && data.municipalities.length == 0 && data.regions.length == 0) {
-            return Triplocations.fetchLocations();
+            return Triplocations.fetchLocations({ limitedFields: true });
         }
         let Locationfeatures = Triplocations.app.models.Locationfeatures;
         let filterQuery = {
@@ -149,10 +157,12 @@ module.exports = function (Triplocations) {
             if (!mainFilter) {
                 return [];
             }
-
+            mainFilter.limitedFields = true;
             return await Triplocations.fetchLocations(mainFilter)
 
         })
+
+
 
     }
 
