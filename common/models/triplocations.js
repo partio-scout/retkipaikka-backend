@@ -50,8 +50,8 @@ module.exports = function (Triplocations) {
 
         let locations = await Triplocations.find(query).then(async obj => {
             return Promise.all(obj.map(async trip => {
+                trip = JSON.parse(JSON.stringify(trip));
                 if (!filter.limitedFields) {
-                    trip = JSON.parse(JSON.stringify(trip));
                     // get image names of triplocation
                     let imagesArr = await fileSystem.getFiles(trip.location_id);
                     trip.images = imagesArr.map(val => val.name);
@@ -63,6 +63,10 @@ module.exports = function (Triplocations) {
                     delete trip.regions;
                     delete trip.municipalities;
 
+                } else {
+                    delete trip.regions;
+                    delete trip.municipalities;
+                    delete trip.filters;
                 }
 
                 return trip;
@@ -125,7 +129,7 @@ module.exports = function (Triplocations) {
             return []
         }
         if (data.filters.length == 0 && data.categories.length == 0 && data.municipalities.length == 0 && data.regions.length == 0) {
-            return Triplocations.fetchLocations({ limitedFields: true });
+            return Triplocations.fetchLocations({ limitedFields: data.limitedFields != null ? data.limitedFields : true });
         }
         let Locationfeatures = Triplocations.app.models.Locationfeatures;
         let filterQuery = {
@@ -157,7 +161,7 @@ module.exports = function (Triplocations) {
             if (!mainFilter) {
                 return [];
             }
-            mainFilter.limitedFields = true;
+            mainFilter.limitedFields = data.limitedFields != null ? data.limitedFields : true;
             return await Triplocations.fetchLocations(mainFilter)
 
         })
