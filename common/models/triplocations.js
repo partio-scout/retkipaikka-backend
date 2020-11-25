@@ -9,14 +9,13 @@ module.exports = function (Triplocations) {
 
     Triplocations.fetchLocations = async function (filter, req, res) {
         let wFilter = {}
-        let fields = []
         var fileSystem = Triplocations.app.models.Images;
-
-        if (filter) {
+        let limitFields = false;
+        if (filter != null) {
+            limitFields = filter.limitedFields ? filter.limitedFields : false;
             wFilter = filter.where ? filter.where : {};
-            fields = filter.limitedFields ? ["location_id", "location_geo", "location_name", "location_category"] : []
         }
-
+        let fields = limitFields ? ["location_id", "location_geo", "location_name", "location_category", "location_region", "location_municipality"] : [];
         // include all relations of triplocation
         let query = {
             where: wFilter,
@@ -43,37 +42,29 @@ module.exports = function (Triplocations) {
                 },
 
 
-            ]
-        };
+            ],
 
+        };
         // find all matching triplocations
 
         let locations = await Triplocations.find(query).then(async obj => {
             return Promise.all(obj.map(async trip => {
                 trip = JSON.parse(JSON.stringify(trip));
-                if (!filter.limitedFields) {
+                if (!limitFields) {
                     // get image names of triplocation
                     let imagesArr = await fileSystem.getFiles(trip.location_id);
                     trip.images = imagesArr.map(val => val.name);
-                    trip.location_region = trip.regions.object_name;
-                    trip.location_municipality = trip.location_municipality ? trip.municipalities.object_name : null;
-                    // remove other values from filters array, leaving only it's name
-                    trip["filters"] = trip["filters"].map(t => t.filter_id)
-                    // delete unneeded relationdata
-                    delete trip.regions;
-                    delete trip.municipalities;
-
-                } else {
-                    delete trip.regions;
-                    delete trip.municipalities;
-                    delete trip.filters;
+                    // remove other values from filters array, leaving only its name
                 }
-
+                trip.location_region = trip.regions.object_name;
+                trip.location_municipality = trip.location_municipality ? trip.municipalities.object_name : null;
+                trip["filters"] = trip["filters"].map(t => t.filter_id)
+                delete trip.regions;
+                delete trip.municipalities;
                 return trip;
             }))
 
         });
-
         console.log("returned " + locations.length + " locations");
         return locations;
     };
@@ -278,7 +269,41 @@ module.exports = function (Triplocations) {
         return postRes;
 
     }
-
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    }
+    Triplocations.createLocations = async function (data, req, res) {
+        let obj = {
+            "object_type": "city",
+            "location_category": 2,
+            "location_municipality": 837,
+            "location_region": 5,
+            "location_name": "testiobjekti",
+            "location_geo": {
+                "lat": 0,
+                "lng": 0
+            },
+            "location_description": "stringstringstringstringstringstringstringstringstringstringstringstring",
+            "location_pricing": "asdasd",
+            "location_accepted": true,
+            "location_owner": "dsadasd",
+            "location_website": "asdasdasd",
+            "location_phone": "dsad",
+            "location_mail": "dsadsad",
+            "location_editor": "asdasdasd",
+        }
+        for (let i = 0; i < 5000; i++) {
+            let temp = JSON.parse(JSON.stringify(obj));
+            let x = getRandomInt(60, 68)
+            let y = getRandomInt(24, 30)
+            temp.location_geo.lat = x;
+            temp.location_geo.lng = y;
+            console.log(i)
+            await Triplocations.create(temp)
+        }
+    }
 
 
     Triplocations.editLocation = async function (locationData, req, res) {
@@ -368,6 +393,19 @@ module.exports = function (Triplocations) {
         returns: { type: Triplocations, root: true }
     }
     );
+    Triplocations.remoteMethod(
+        'createLocations', {
+        http: { path: '/createLocations', verb: 'get' },
+        accepts: [
+            { arg: 'filter', type: 'object', http: { source: 'query' } },
+            { arg: 'req', type: 'object', http: { source: 'req' } },
+            { arg: 'res', type: 'object', http: { source: 'res' } }
+        ],
+        description: "returns all locations with all data",
+        returns: { type: Triplocations, root: true }
+    }
+    );
+
 
     Triplocations.remoteMethod(
         'handleFiltering', {
