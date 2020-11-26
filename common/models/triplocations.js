@@ -11,15 +11,18 @@ module.exports = function (Triplocations) {
         let wFilter = {}
         var fileSystem = Triplocations.app.models.Images;
         let limitFields = false;
+        let count = null;
         if (filter != null) {
             limitFields = filter.limitedFields ? filter.limitedFields : false;
             wFilter = filter.where ? filter.where : {};
+            count = filter.limit ? filter.limit : null;
         }
         let fields = limitFields ? ["location_id", "location_geo", "location_name", "location_category", "location_region", "location_municipality"] : [];
         // include all relations of triplocation
         let query = {
             where: wFilter,
             fields: fields,
+            order: "updatedAt DESC",
             include: [
                 {
                     relation: "filters",
@@ -45,6 +48,9 @@ module.exports = function (Triplocations) {
             ],
 
         };
+        if (count != null) {
+            query.limit = count;
+        }
         // find all matching triplocations
 
         let locations = await Triplocations.find(query).then(async obj => {
@@ -65,7 +71,7 @@ module.exports = function (Triplocations) {
             }))
 
         });
-        console.log("returned " + locations.length + " locations");
+
         return locations;
     };
 
