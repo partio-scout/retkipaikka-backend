@@ -1,5 +1,5 @@
 //notifications field possible values are "none", "all", "some"
-
+const { sendEmail } = require("../helpers/helpers")
 // fetch users and their roles
 module.exports = function (Admin) {
     Admin.fetchUsers = async function (filter, req, res) {
@@ -154,28 +154,7 @@ module.exports = function (Admin) {
     }
 
 
-    const sendEmail = async function (emails, title, text, subject, from) {
 
-        let html = `<div><h5>${title}</h5><br /> ${text}</div>`
-        for (const email of emails) {
-            console.log(html);
-            // Admin.app.models.Email.send({
-            //     to: email,
-            //     from: from,
-            //     subject: subject,
-            //     html: html
-            // }, function (err) {
-            //     if (err) {
-            //         console.log(err);
-            //         console.log('> error sending an email');
-            //         return
-            //     }
-            //     console.log('> email sent to:', email);
-            // });
-        }
-
-        return;
-    }
 
 
     // after user is registered, send email to superadmins
@@ -190,7 +169,8 @@ module.exports = function (Admin) {
             }
         })
         if (emails.length !== 0) {
-            sendEmail(emails, "Uusi rekisteröinti", "Uusi käyttäjä rekisteröity retkipaikkasovellukseen", "Partion retkipaikat käyttäjä", "noreply@partio.com")
+            let html = `<div><h3>Uusi rekisteröinti</h3><br /> Uusi käyttäjä rekisteröity retkipaikkasovellukseen</div>`
+            sendEmail(Admin.app.models.Email, emails, html, "Partion retkipaikat", "noreply@retkipaikka.com")
         }
 
 

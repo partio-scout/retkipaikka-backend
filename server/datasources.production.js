@@ -20,9 +20,25 @@ if (use_DB === "true") {
         connector: "memory",
         file: "data.json"
     }
-
+}
+let emailDataSource = {
+    "name": "email",
+    "connector": "mail",
+    "transports": [
+        {
+            "type": "smtp",
+            "host": process.env.SMTP_URL || "smtp.gmail.com",
+            "secure": true,
+            "port": process.env.SMTP_PORT || 465,
+            "auth": {
+                "user": process.env.SMTP_EMAIL || "",
+                "pass": process.env.STMP_PASSWORD || ""
+            }
+        }
+    ]
 }
 
+datasource.email = emailDataSource;
 datasource.db = dbObj
 
 module.exports = datasource;

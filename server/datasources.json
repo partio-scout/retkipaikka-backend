@@ -14,15 +14,12 @@
     "transports": [
       {
         "type": "smtp",
-        "host": "smtp.private.com",
-        "secure": false,
-        "port": 587,
-        "tls": {
-          "rejectUnauthorized": false
-        },
+        "host": "smtp.gmail.com",
+        "secure": true,
+        "port": 465,
         "auth": {
-          "user": "me@private.com",
-          "pass": "password"
+          "user": "",
+          "pass": ""
         }
       }
     ]
