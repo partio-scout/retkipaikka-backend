@@ -333,37 +333,37 @@ module.exports = function (Triplocations) {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
     }
-    Triplocations.createLocations = async function (data, req, res) {
-        let obj = {
-            "object_type": "city",
-            "location_category": 2,
-            "location_municipality": 837,
-            "location_region": 5,
-            "location_name": "testiobjekti",
-            "location_geo": {
-                "lat": 0,
-                "lng": 0
-            },
-            "location_description": "stringstringstringstringstringstringstringstringstringstringstringstring",
-            "location_pricing": "asdasd",
-            "location_accepted": true,
-            "location_owner": "dsadasd",
-            "location_website": "asdasdasd",
-            "location_phone": "dsad",
-            "location_mail": "dsadsad",
-            "location_editor": "asdasdasd",
+    /*     Triplocations.createLocations = async function (data, req, res) {
+            let obj = {
+                "object_type": "city",
+                "location_category": 2,
+                "location_municipality": 837,
+                "location_region": 5,
+                "location_name": "testiobjekti",
+                "location_geo": {
+                    "lat": 0,
+                    "lng": 0
+                },
+                "location_description": "stringstringstringstringstringstringstringstringstringstringstringstring",
+                "location_pricing": "asdasd",
+                "location_accepted": true,
+                "location_owner": "dsadasd",
+                "location_website": "asdasdasd",
+                "location_phone": "dsad",
+                "location_mail": "dsadsad",
+                "location_editor": "asdasdasd",
+            }
+            for (let i = 0; i < 5000; i++) {
+                let temp = JSON.parse(JSON.stringify(obj));
+                let x = getRandomInt(60, 68)
+                let y = getRandomInt(24, 30)
+                temp.location_geo.lat = x;
+                temp.location_geo.lng = y;
+                console.log(i)
+                await Triplocations.create(temp)
+            }
         }
-        for (let i = 0; i < 5000; i++) {
-            let temp = JSON.parse(JSON.stringify(obj));
-            let x = getRandomInt(60, 68)
-            let y = getRandomInt(24, 30)
-            temp.location_geo.lat = x;
-            temp.location_geo.lng = y;
-            console.log(i)
-            await Triplocations.create(temp)
-        }
-    }
-
+     */
 
     Triplocations.editLocation = async function (locationData, req, res) {
         let Locationfeatures = Triplocations.app.models.Locationfeatures;
@@ -452,18 +452,18 @@ module.exports = function (Triplocations) {
         returns: { type: Triplocations, root: true }
     }
     );
-    Triplocations.remoteMethod(
-        'createLocations', {
-        http: { path: '/createLocations', verb: 'get' },
-        accepts: [
-            { arg: 'filter', type: 'object', http: { source: 'query' } },
-            { arg: 'req', type: 'object', http: { source: 'req' } },
-            { arg: 'res', type: 'object', http: { source: 'res' } }
-        ],
-        description: "returns all locations with all data",
-        returns: { type: Triplocations, root: true }
-    }
-    );
+    /*   Triplocations.remoteMethod(
+          'createLocations', {
+          http: { path: '/createLocations', verb: 'get' },
+          accepts: [
+              { arg: 'filter', type: 'object', http: { source: 'query' } },
+              { arg: 'req', type: 'object', http: { source: 'req' } },
+              { arg: 'res', type: 'object', http: { source: 'res' } }
+          ],
+          description: "returns all locations with all data",
+          returns: { type: Triplocations, root: true }
+      }
+      ); */
 
 
     Triplocations.remoteMethod(
