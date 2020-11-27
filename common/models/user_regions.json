@@ -1,41 +1,41 @@
 {
-    "name": "UsersRegions",
-    "base": "PersistedModel",
-    "foreignKeys": {
-        "admin_id": {
-            "name": "admin_id",
-            "foreignKey": "admin_id",
-            "entityKey": "admin_id",
-            "entity": "Admin"
-        },
-        "region_id": {
-            "name": "region_id",
-            "foreignKey": "region_id",
-            "entityKey": "region_id",
-            "entity": "Regions"
-        }
+  "name": "UsersRegions",
+  "base": "PersistedModel",
+  "foreignKeys": {
+    "admin_id": {
+      "name": "admin_id",
+      "foreignKey": "admin_id",
+      "entityKey": "admin_id",
+      "entity": "Admin"
     },
-    "properties": {},
-    "validations": [],
-    "relations": {
-        "admin": {
-            "type": "belongsTo",
-            "model": "Admin",
-            "foreignKey": "admin_id"
-        },
-        "regions": {
-            "type": "belongsTo",
-            "model": "Regions",
-            "foreignKey": "region_id"
-        }
+    "region_id": {
+      "name": "region_id",
+      "foreignKey": "region_id",
+      "entityKey": "region_id",
+      "entity": "Regions"
+    }
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "admin": {
+      "type": "belongsTo",
+      "model": "Admin",
+      "foreignKey": "admin_id"
     },
-    "acls": [
-        {
-            "accessType": "*",
-            "principalType": "ROLE",
-            "principalId": "$everyone",
-            "permission": "DENY"
-        }
-    ],
-    "methods": {}
+    "regions": {
+      "type": "belongsTo",
+      "model": "Regions",
+      "foreignKey": "region_id"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ],
+  "methods": {}
 }

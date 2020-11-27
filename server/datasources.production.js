@@ -32,7 +32,7 @@ let emailDataSource = {
             "port": process.env.SMTP_PORT || 465,
             "auth": {
                 "user": process.env.SMTP_EMAIL || "",
-                "pass": process.env.STMP_PASSWORD || ""
+                "pass": process.env.SMTP_PASSWORD || ""
             }
         }
     ]

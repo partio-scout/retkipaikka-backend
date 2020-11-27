@@ -3,6 +3,8 @@ const uuidv4 = require('uuid/v4');
 const multiparty = require('multiparty');
 const fs = require('fs');
 const path = require('path')
+const { sendEmail } = require("../helpers/helpers");
+
 
 
 module.exports = function (Triplocations) {
@@ -71,7 +73,7 @@ module.exports = function (Triplocations) {
             }))
 
         });
-
+        console.log("returned " + locations.length + " locations")
         return locations;
     };
 
@@ -215,9 +217,10 @@ module.exports = function (Triplocations) {
         newObject["location_id"] = uuid;
         newObject["location_accepted"] = false;
         newObject["object_type"] = "city";
+        let returnObj = {};
         // inserta new triplocation to database
         try {
-            await Triplocations.create(newObject);
+            returnObj = await Triplocations.create(newObject);
         } catch (err) {
             console.error(err);
             return "fail"
@@ -238,7 +241,57 @@ module.exports = function (Triplocations) {
         let fileSystem = Triplocations.app.models.Images;
         await fileSystem.createContainer({ "name": uuid })
         console.log("1 location succesfully added")
-        return uuid
+        return returnObj
+
+    }
+    const handleAdminEmailSend = async (data) => {
+        const { location_region, location_id } = data;
+        const UserRegions = Triplocations.app.models.UsersRegions;
+        const Admin = Triplocations.app.models.Admin;
+        const Email = Triplocations.app.models.Email;
+        const FRONTEND_URL = process.env.FRONTEND_URL;
+        const filter = {
+            where: { region_id: location_region },
+            include: [
+                {
+                    relation: "admin",
+                    scope: {
+                        fields: ["email"]
+                    }
+
+
+                }
+
+            ]
+        }
+        const adminFilter = {
+            where: { notifications: "all" },
+            fields: ["email"]
+        }
+        let normalUrl = `${FRONTEND_URL}/hallinta/uudet`
+        let uuidUrl = `${FRONTEND_URL}/retkipaikka/${location_id}`
+        let html = `<div><h3>Uusi retkipaikka</h3><br /> Uusi retkipaikka lisätty alueelle, josta olet aktivoinut ilmoituksen. 
+                <br/> <br/> Voit katsoa ilmoitusta hallintasivun kautta <a href=${normalUrl}>${normalUrl}</a> tai suoraan osoitteesta <a href=${uuidUrl}>${uuidUrl}</a></div>`
+        await UserRegions.find(filter).then(async res => {
+            let emails = []
+            res.forEach(item => {
+                let temp = JSON.parse(JSON.stringify(item));
+                emails.push(temp.admin.email);
+            })
+
+            await Admin.find(adminFilter).then(aRes => {
+                aRes.forEach(a => {
+                    if (!emails.includes(a.email)) {
+                        emails.push(a.email)
+                    }
+                })
+            })
+            if (emails.length !== 0) {
+                sendEmail(Email, emails, html, "Ilmoitus uudesta retkipaikasta")
+            }
+        });
+        return "test";
+
 
     }
     Triplocations.addNewLocation = async function (locationData, req, res) {
@@ -257,12 +310,12 @@ module.exports = function (Triplocations) {
         } else {
             // generate images if user inputted
             if (images) {
-                await handleImageCreation(postRes, images, res)
+                await handleImageCreation(postRes.location_id, images, res)
             }
 
         }
-
-        return postRes;
+        handleAdminEmailSend(postRes)
+        return postRes.location_id;
 
     }
 
@@ -368,8 +421,8 @@ module.exports = function (Triplocations) {
         };
         // delete relationdata and triplocation
         try {
-            await Locationfeatures.destroyAll(query).then(res => {
-                Triplocations.destroyById(locationuuid)
+            await Locationfeatures.destroyAll(query).then(async res => {
+                await Triplocations.destroyById(locationuuid)
             })
         } catch (error) {
             console.error(error);

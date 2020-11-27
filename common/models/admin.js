@@ -163,14 +163,17 @@ module.exports = function (Admin) {
         let admins = await Admin.fetchUsers({})
         admins = JSON.parse(JSON.stringify(admins))
         admins = admins.filter(a => a.roles.find(r => r.name === "superadmin"))
+        const FRONTEND_URL = process.env.FRONTEND_URL;
+        let normalUrl = `${FRONTEND_URL}/hallinta/asetukset`
         admins.forEach(a => {
-            if (a.email) {
+            if (a.email && a.user_notifications == "all") {
                 emails.push(a.email)
             }
         })
         if (emails.length !== 0) {
-            let html = `<div><h3>Uusi rekisteröinti</h3><br /> Uusi käyttäjä rekisteröity retkipaikkasovellukseen</div>`
-            sendEmail(Admin.app.models.Email, emails, html, "Partion retkipaikat", "noreply@retkipaikka.com")
+            let html = `<div><h3>Uusi rekisteröinti</h3><br /> Uusi käyttäjä rekisteröity retkipaikkasovellukseen 
+            <br/> Voit katsoa ilmoitusta hallintasivun kautta osoitteesta ${normalUrl}</div>`
+            sendEmail(Admin.app.models.Email, emails, html, "Partion retkipaikat")
         }
 
 

@@ -1,7 +1,7 @@
 
 
-const sendEmail = async function (EmailModel, emails, html, subject, from) {
-
+const sendEmail = async function (EmailModel, emails, html, subject) {
+    let from = process.env.SMTP_EMAIL;
     //let html = `<div><h5>${title}</h5><br /> ${text}</div>`
     for (const email of emails) {
         await EmailModel.send({

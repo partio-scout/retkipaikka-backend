@@ -62,7 +62,7 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "DENY",
-      "property": "create"
+      "accessType": "*"
     },
     {
       "principalType": "ROLE",
@@ -138,6 +138,13 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "createUser"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superadmin",
+      "permission": "ALLOW",
+      "property": "deleteById"
     }
   ],
   "methods": {}
