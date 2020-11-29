@@ -22,6 +22,9 @@ services:
            - DB_POSTGRES_PW=${DB_POSTGRES_PW}
            - USE_DB=${USE_DB}
            - SSL=${SSL}
+           - SMTP_EMAIL=${SMTP_EMAIL}
+           - SMTP_PASSWORD=${SMTP_PASSWORD}
+           - FRONTEND_URL=${FRONTEND_URL}
         restart: always
         command: sh -c 'nodemon -r dotenv/config --exitcrash --watch common/ --watch server/' 
     db:

@@ -22,6 +22,9 @@ DB_POSTGRES_EMAIL=hallinta@retkipaikka.com
 DB_POSTGRES_PW=password
 USE_DB=true
 SSL=false
+SMTP_EMAIL=email
+SMTP_PASSWORD=password
+FRONTEND_URL=url
 ```
 
 ## Ajaminen ilman dockeria
