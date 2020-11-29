@@ -145,6 +145,13 @@
       "principalId": "superadmin",
       "permission": "ALLOW",
       "property": "deleteById"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "superadmin",
+      "permission": "ALLOW",
+      "property": "__delete__regions"
     }
   ],
   "methods": {}

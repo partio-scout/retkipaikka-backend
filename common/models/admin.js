@@ -2,6 +2,7 @@
 const { sendEmail } = require("../helpers/helpers")
 // fetch users and their roles
 module.exports = function (Admin) {
+    const FRONTEND_URL = process.env.FRONTEND_URL;
     Admin.fetchUsers = async function (filter, req, res) {
         let wFilter = {}
         if (filter) {
@@ -64,7 +65,20 @@ module.exports = function (Admin) {
                 }
             }
             if (Object.keys(user).length > 1) {
+                if (user.new_user != null) {
+                    await Admin.findById(user.admin_id).then(async res => {
+                        let tempUser = JSON.parse(JSON.stringify(res));
+                        if (tempUser.new_user == true && user.new_user == false) {
+                            let normalUrl = `${FRONTEND_URL}/hallinta`
+                            let html = `<div><h3>Rekisteröinti hyväksytty</h3><br /> Käyttäjäsi on hyväksytty retkipaikkasovellukseen.
+                            <br/> Voit kirjautua sisään sovellukseen menemällä osoitteeseen ${normalUrl}</div>`
+                            await sendEmail(Admin.app.models.Email, [tempUser.email], html, "Käyttäjän luonti")
+                        }
+                    })
+                }
                 await Admin.updateSettings(user)
+
+
             }
             return "success"
 
@@ -163,7 +177,6 @@ module.exports = function (Admin) {
         let admins = await Admin.fetchUsers({})
         admins = JSON.parse(JSON.stringify(admins))
         admins = admins.filter(a => a.roles.find(r => r.name === "superadmin"))
-        const FRONTEND_URL = process.env.FRONTEND_URL;
         let normalUrl = `${FRONTEND_URL}/hallinta/asetukset`
         admins.forEach(a => {
             if (a.email && a.user_notifications == "all") {

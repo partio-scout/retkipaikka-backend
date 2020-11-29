@@ -28,7 +28,7 @@
   },
   "RoleMapping": {
     "dataSource": "db",
-    "public": true,
+    "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
