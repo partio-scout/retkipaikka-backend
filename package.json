@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server/server.js",
   "engines": {
-    "node": "12.18.3"
+    "node": "14"
   },
   "scripts": {
     "lint": "eslint .",
@@ -32,8 +32,8 @@
     "uuid": "^3.4.0"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-loopback": "^8.0.0"
+    "eslint": "^8.10.0",
+    "eslint-config-loopback": "^13.1.0"
   },
   "repository": {
     "type": "",

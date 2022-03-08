@@ -45,42 +45,46 @@ module.exports = function (Admin) {
         if (roles && user) {
             let RoleMapping = Admin.app.models.RoleMapping;
             let adminId = user.admin_id;
-            if (roles) {
-                if (roles.length >= 0) {
-                    try {
-                        await RoleMapping.destroyAll({ principalId: adminId }).then(async res => {
-                            for (let i = 0; i < roles.length; ++i) {
-                                let relationObject = {
-                                    principalType: "USER",
-                                    principalId: adminId,
-                                    roleId: roles[i]
-                                }
-                                await RoleMapping.create(relationObject);
+
+            return Promise.resolve().then(async () => {
+                if (roles) {
+                    if (roles.length >= 0) {
+                        await RoleMapping.destroyAll({ principalId: adminId })
+                        for (let i = 0; i < roles.length; ++i) {
+                            let relationObject = {
+                                principalType: "USER",
+                                principalId: adminId,
+                                roleId: roles[i]
                             }
-                        })
-                    } catch (err) {
-                        res.status(err.statusCode ? err.statusCode : 500)
-                        return err
+
+                            await RoleMapping.create(relationObject);
+                        }
+
+
                     }
                 }
-            }
-            if (Object.keys(user).length > 1) {
-                if (user.new_user != null) {
-                    await Admin.findById(user.admin_id).then(async res => {
-                        let tempUser = JSON.parse(JSON.stringify(res));
-                        if (tempUser.new_user == true && user.new_user == false) {
-                            let normalUrl = `${FRONTEND_URL}/hallinta`
-                            let html = `<div><h3>Rekisteröinti hyväksytty</h3><br /> Käyttäjäsi on hyväksytty retkipaikkasovellukseen.
+                if (Object.keys(user).length > 1) {
+                    if (user.new_user != null) {
+                        await Admin.findById(user.admin_id).then(async res => {
+                            let tempUser = JSON.parse(JSON.stringify(res));
+                            if (tempUser.new_user == true && user.new_user == false) {
+                                let normalUrl = `${FRONTEND_URL}/hallinta`
+                                let html = `<div><h3>Rekisteröinti hyväksytty</h3><br /> Käyttäjäsi on hyväksytty retkipaikkasovellukseen.
                             <br/> Voit kirjautua sisään sovellukseen menemällä osoitteeseen ${normalUrl}</div>`
-                            await sendEmail(Admin.app.models.Email, [tempUser.email], html, "Käyttäjän luonti")
-                        }
-                    })
+                                await sendEmail(Admin.app.models.Email, [tempUser.email], html, "Käyttäjän luonti")
+                            }
+                        })
+                    }
+                    await Admin.updateSettings(user)
+
+
                 }
-                await Admin.updateSettings(user)
-
-
-            }
-            return "success"
+                return "success"
+            }).catch((err) => {
+                console.error(err)
+                res.status(err.statusCode ? err.statusCode : 500)
+                return err
+            });
 
         }
         res.status(422);

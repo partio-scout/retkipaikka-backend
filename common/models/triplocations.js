@@ -9,15 +9,17 @@ const { sendEmail } = require("../helpers/helpers");
 
 module.exports = function (Triplocations) {
 
-    Triplocations.fetchLocations = async function (filter, req, res) {
+    Triplocations.fetchLocations = async (filter, req, res) => {
         let wFilter = {}
         var fileSystem = Triplocations.app.models.Images;
         let limitFields = false;
         let count = null;
+        let order = null;
         if (filter != null) {
             limitFields = filter.limitedFields ? filter.limitedFields : false;
             wFilter = filter.where ? filter.where : {};
             count = filter.limit ? filter.limit : null;
+            order = filter.order ? filter.order : null;
         }
         let fields = limitFields ? ["location_id", "location_geo", "location_name", "location_category", "location_region", "location_municipality"] : [];
         // include all relations of triplocation
@@ -53,10 +55,14 @@ module.exports = function (Triplocations) {
         if (count != null) {
             query.limit = count;
         }
+        if (order != null) {
+            query.order = order
+        }
         // find all matching triplocations
+        let locations = await Triplocations.find(query).then(async arr => {
+            let tempLocs = [];
 
-        let locations = await Triplocations.find(query).then(async obj => {
-            return Promise.all(obj.map(async trip => {
+            for (let trip of arr) {
                 trip = JSON.parse(JSON.stringify(trip));
                 if (!limitFields) {
                     // get image names of triplocation
@@ -69,8 +75,9 @@ module.exports = function (Triplocations) {
                 trip["filters"] = trip["filters"].map(t => t.filter_id)
                 delete trip.regions;
                 delete trip.municipalities;
-                return trip;
-            }))
+                tempLocs.push(trip);
+            }
+            return tempLocs;
 
         });
         console.log("returned " + locations.length + " locations")
@@ -84,13 +91,14 @@ module.exports = function (Triplocations) {
             if (err || !fields || !files) {
                 reject("fail");
             } else {
-                const images = files['image'] // get images from the parsed object
+                const images = files['image'] || fields['image'] // get images from the parsed object
                 const data = fields['object'][0] //get dataobject from the parsed object
                 if (!data) reject("fail");
                 else resolve([data, images]);
             }
         });
     });
+
     const generateMainFilter = (locationIds, data) => {
         if (locationIds.length === 0) {
             return null;
@@ -123,7 +131,7 @@ module.exports = function (Triplocations) {
     }
 
 
-    Triplocations.handleFiltering = async function (data, req, res) {
+    Triplocations.handleFiltering = async (data, req, res) => {
         if (!data.filters || !data.categories || !data.municipalities || !data.regions) {
             return []
         }
@@ -169,10 +177,9 @@ module.exports = function (Triplocations) {
 
     }
 
-    const checkModelExists = async function (model, id) {
+    const checkModelExists = (model, id) => {
         // check if entry exists in database
-        let response = await model.exists(id);
-        return response;
+        return model.exists(id);
     }
     const handleImageCreation = async function (id, imgs, res) {
         // add images for correct triplocation
@@ -194,7 +201,7 @@ module.exports = function (Triplocations) {
         // check if inputted id's exist
         let categoryBool = await checkModelExists(Categories, objData.location_category);
         let regionBool = await checkModelExists(Regions, objData.location_region);
-        let municipalityBool = typeof objData.location_municipality !== "undefined" ? await checkModelExists(Municipalities, objData.location_municipality) : true;
+        let municipalityBool = objData.location_municipality != null ? await checkModelExists(Municipalities, objData.location_municipality) : true;
         if (!categoryBool || !regionBool || !municipalityBool) {
             return "fail"
         }
@@ -279,13 +286,14 @@ module.exports = function (Triplocations) {
                 emails.push(temp.admin.email);
             })
 
-            await Admin.find(adminFilter).then(aRes => {
-                aRes.forEach(a => {
-                    if (!emails.includes(a.email)) {
-                        emails.push(a.email)
-                    }
-                })
+            let aRes = await Admin.find(adminFilter)
+
+            aRes.forEach(a => {
+                if (!emails.includes(a.email)) {
+                    emails.push(a.email)
+                }
             })
+
             if (emails.length !== 0) {
                 sendEmail(Email, emails, html, "Ilmoitus uudesta retkipaikasta")
             }
@@ -365,7 +373,7 @@ module.exports = function (Triplocations) {
         }
      */
 
-    Triplocations.editLocation = async function (locationData, req, res) {
+    Triplocations.editLocation = (locationData, req, res) => {
         let Locationfeatures = Triplocations.app.models.Locationfeatures;
         let newObject = JSON.parse(JSON.stringify(locationData));
         const locationuuid = locationData.location_id;
@@ -375,43 +383,44 @@ module.exports = function (Triplocations) {
         if (locationData.location_region && !locationData.location_municipality) {
             newObject.location_municipality = null;
         }
-        // if filters are not in query, don't modify, 
-        // otherwise replace old ones with array contents
-        if (locationData.filters) {
-            if (locationData.filters.length >= 0) {
-                let dataFilters = locationData.filters;
-                try {
-                    await Locationfeatures.destroyAll(query).then(async res => {
-                        for (let i = 0; i < dataFilters.length; ++i) {
-                            let relationObject = {
-                                location_id: locationuuid,
-                                filter_id: dataFilters[i]
-                            }
-                            await Locationfeatures.create(relationObject);
+
+        return Promise.resolve().then(async (res) => {
+            // if filters are not in query, don't modify, 
+            // otherwise replace old ones with array contents
+            if (locationData.filters) {
+                if (locationData.filters.length >= 0) {
+                    let dataFilters = locationData.filters;
+                    await Locationfeatures.destroyAll(query)
+                    for (let i = 0; i < dataFilters.length; ++i) {
+                        let relationObject = {
+                            location_id: locationuuid,
+                            filter_id: dataFilters[i]
                         }
-                    })
-                } catch (err) {
-                    res.status(err.statusCode ? err.statusCode : 422)
-                    return err
+                        await Locationfeatures.create(relationObject);
+                    }
+
+
+
+
+
                 }
-
-
-
+                delete newObject["filters"];
             }
-            delete newObject["filters"];
-        }
 
-        try {
+
             await Triplocations.updateAll({ location_id: locationuuid }, newObject)
-        } catch (err) {
-            console.error(error);
+
+
+            console.log("location succesfully updated")
+            return "success"
+
+        }).catch((err) => {
+            console.error(err)
             res.status(err.statusCode ? err.statusCode : 422)
             return err
-        }
-        console.log("location succesfully updated")
-        return "success"
-
+        })
     }
+
 
     Triplocations.deleteLocation = async function (locationData, req, res) {
         let Locationfeatures = Triplocations.app.models.Locationfeatures;
@@ -420,17 +429,17 @@ module.exports = function (Triplocations) {
             location_id: locationuuid
         };
         // delete relationdata and triplocation
-        try {
-            await Locationfeatures.destroyAll(query).then(async res => {
-                await Triplocations.destroyById(locationuuid)
-            })
-        } catch (error) {
+        return Locationfeatures.destroyAll(query).then(async res => {
+            return Triplocations.destroyById(locationuuid)
+        }).then(() => {
+            console.log("location succesfully deleted")
+            return "success"
+        }).catch((error) => {
             console.error(error);
             res.status(err.statusCode ? err.statusCode : 422)
             return err
-        }
-        console.log("location succesfully deleted")
-        return "success"
+        })
+
 
     }
 
